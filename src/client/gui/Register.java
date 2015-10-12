@@ -1,7 +1,6 @@
 package client.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+@SuppressWarnings("serial")
 public class Register extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

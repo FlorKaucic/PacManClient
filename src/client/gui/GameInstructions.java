@@ -1,7 +1,6 @@
 package client.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,6 +10,7 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class GameInstructions extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
