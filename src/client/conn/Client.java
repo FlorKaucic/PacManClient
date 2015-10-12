@@ -1,4 +1,4 @@
-package conn.client;
+package client.conn;
 
 import java.io.BufferedReader;
 import java.io.IOException;
