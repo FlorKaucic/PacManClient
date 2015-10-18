@@ -18,25 +18,25 @@ public class Client {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-//			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-//			String fromServer;
-//			String fromUser;
+			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+			String fromServer;
+			String fromUser;
 			
-//			while ((fromServer = in.readLine()) != null) {
-//				System.out.println("Server: " + fromServer);
-//				if (fromServer.equals("Se recibio: fin"))
-//					break;
-//
-//				fromUser = stdIn.readLine();
-//				if (fromUser != null) {
-//					System.out.println("Client: " + fromUser);
-//					out.println(fromUser);
-//				}
-//			}
+			while ((fromServer = in.readLine()) != null) {
+				System.out.println("Server: " + fromServer);
+				if (fromServer.equals("Se recibio: fin"))
+					break;
+
+				fromUser = stdIn.readLine();
+				if (fromUser != null) {
+					System.out.println("Client: " + fromUser);
+					out.println(fromUser);
+				}
+			}
 			
 			out.close();
 			in.close();
-//			stdIn.close();
+			stdIn.close();
 			socket.close();
 		}catch (UnknownHostException e){
 			System.err.println("Host desconocido.\n"+e);

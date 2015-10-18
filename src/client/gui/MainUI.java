@@ -1,5 +1,6 @@
 package client.gui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,9 +17,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
-public class MainMenu extends JFrame {
+public class MainUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUser;
 	private JTextField textFieldPassword;
@@ -30,7 +33,7 @@ public class MainMenu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainMenu frame = new MainMenu();
+					MainUI frame = new MainUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +53,7 @@ public class MainMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainMenu() {
+	public MainUI() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -58,64 +61,73 @@ public class MainMenu extends JFrame {
 				cerrarVentana();
 			}
 		});
-		setTitle("PacoMan - Menu Principal");
-		setBounds(100, 100, 450, 300);
+		setTitle("Pacman");
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		setBounds(dim.width / 2 - 200, dim.height / 2 - 225, 400, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		textFieldUser = new JTextField();
-		textFieldUser.setBounds(128, 86, 122, 20);
+		textFieldUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textFieldUser.setBounds(139, 111, 180, 20);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		textFieldUser.requestFocus();
 
 		textFieldPassword = new JTextField();
-		textFieldPassword.setBounds(128, 122, 122, 20);
+		textFieldPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textFieldPassword.setBounds(139, 147, 180, 20);
 		contentPane.add(textFieldPassword);
 		textFieldPassword.setColumns(10);
 
-		JLabel lblLogIn = new JLabel("Ingreso:");
-		lblLogIn.setBounds(41, 35, 46, 14);
-		contentPane.add(lblLogIn);
-
 		JLabel lblUser = new JLabel("Usuario");
-		lblUser.setBounds(41, 89, 77, 14);
+		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUser.setBounds(61, 114, 80, 14);
 		contentPane.add(lblUser);
 
 		JLabel lblPassword = new JLabel("Contrase\u00F1a");
-		lblPassword.setBounds(41, 125, 77, 14);
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassword.setBounds(61, 150, 80, 14);
 		contentPane.add(lblPassword);
 
 		JButton btnLogIn = new JButton("Acceder");
+		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textFieldUser.getText(); //aca lo que sea que quieran hacer con esos 2 fields.
 				textFieldPassword.getText();
 			}
 		});
-		btnLogIn.setBounds(140, 153, 89, 23);
+		btnLogIn.setBounds(105, 190, 180, 40);
 		contentPane.add(btnLogIn);
 
 		JButton btnRegister = new JButton("Registrarse");
+		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Register reg = new Register();
+				NewUserUI reg = new NewUserUI();
 				reg.setVisible(true);
 			}
 		});
-		btnRegister.setBounds(275, 85, 128, 23);
+		btnRegister.setBounds(105, 280, 180, 40);
 		contentPane.add(btnRegister);
 
 		JButton btnInstructions = new JButton("Instrucciones");
+		btnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameInstructions instr = new GameInstructions();
+				InstructionsUI instr = new InstructionsUI();
 				instr.setVisible(true);
 			}
 		});
-		btnInstructions.setBounds(275, 121, 128, 23);
+		btnInstructions.setBounds(105, 350, 180, 40);
 		contentPane.add(btnInstructions);
+		
+		JLabel lblPacman = new JLabel("PACMAN - Multijugador");
+		lblPacman.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPacman.setBounds(90, 11, 214, 40);
+		contentPane.add(lblPacman);
 	}
 }
