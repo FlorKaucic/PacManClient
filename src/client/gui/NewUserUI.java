@@ -114,6 +114,10 @@ public class NewUserUI extends JDialog {
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int f=1;
+				if(textFieldUser.getText().equals("") || Arrays.equals(textFieldPassword.getPassword(),null) || Arrays.equals(textFieldConfirm.getPassword(),null)){
+					lblMsg.setForeground(Color.red);
+					lblMsg.setText("No puede haber campos vacíos");
+				}else{
 				if(Arrays.equals(textFieldPassword.getPassword(),textFieldConfirm.getPassword())){
 					lblMsg.setForeground(Color.blue);
 					lblMsg.setText("Solicitud enviada");
@@ -137,6 +141,7 @@ public class NewUserUI extends JDialog {
 					lblMsg.setForeground(Color.red);
 					lblMsg.setText("Las contraseñas no coinciden.");
 					textFieldPassword.requestFocus();
+				}
 				}
 			}
 		});
