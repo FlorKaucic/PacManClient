@@ -49,6 +49,12 @@ public class MainUI extends JFrame {
 			System.exit(0);
 		}
 	}
+	
+	public static void acceso(int i){ //hay que cambiar las entradas por lo que sea que necesite
+		//accede y cierra la ventana actual
+		JOptionPane.showMessageDialog(null, "Se accede al juego", "", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
 
 	/**
 	 * Create the frame.
@@ -92,12 +98,14 @@ public class MainUI extends JFrame {
 		lblPassword.setBounds(61, 150, 80, 14);
 		contentPane.add(lblPassword);
 
+	
 		JButton btnLogIn = new JButton("Acceder");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textFieldUser.getText(); //aca lo que sea que quieran hacer con esos 2 fields.
 				textFieldPassword.getText();
+				acceso(1);
 			}
 		});
 		btnLogIn.setBounds(105, 190, 180, 40);
@@ -107,8 +115,10 @@ public class MainUI extends JFrame {
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int i = 0;
 				NewUserUI reg = new NewUserUI();
 				reg.setVisible(true);
+				
 			}
 		});
 		btnRegister.setBounds(105, 280, 180, 40);

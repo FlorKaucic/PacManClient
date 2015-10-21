@@ -14,25 +14,31 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Arrays;
+
+import javax.swing.JPasswordField;
+import java.awt.Color;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class NewUserUI extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldUser;
-	private JTextField textFieldPassword;
-	private JTextField textFieldConfirm;
-
+	private JPasswordField textFieldPassword;
+	private JPasswordField textFieldConfirm;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		try {
 			NewUserUI dialog = new NewUserUI();
 			dialog.setVisible(true);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	
 	}
 	public void cerrarVentana(){
 		int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar", JOptionPane.OK_CANCEL_OPTION);
@@ -52,6 +58,7 @@ public class NewUserUI extends JDialog {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				cerrarVentana();
+				
 			}
 		});
 		
@@ -65,16 +72,6 @@ public class NewUserUI extends JDialog {
 		contentPanel.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		
-		textFieldPassword = new JTextField();
-		textFieldPassword.setBounds(161, 66, 247, 20);
-		contentPanel.add(textFieldPassword);
-		textFieldPassword.setColumns(10);
-		
-		textFieldConfirm = new JTextField();
-		textFieldConfirm.setBounds(161, 97, 247, 20);
-		contentPanel.add(textFieldConfirm);
-		textFieldConfirm.setColumns(10);
-		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(27, 41, 115, 14);
 		contentPanel.add(lblUsuario);
@@ -86,6 +83,20 @@ public class NewUserUI extends JDialog {
 		JLabel lblConfirmacionDeClave = new JLabel("Confirmacion de Clave:");
 		lblConfirmacionDeClave.setBounds(27, 103, 115, 14);
 		contentPanel.add(lblConfirmacionDeClave);
+		
+		JLabel lblMsg = new JLabel("");
+		lblMsg.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMsg.setBounds(161, 131, 247, 14);
+		contentPanel.add(lblMsg);
+		
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setBounds(161, 66, 247, 20);
+		contentPanel.add(textFieldPassword);
+		
+		textFieldConfirm = new JPasswordField();
+		textFieldConfirm.setBounds(161, 97, 247, 20);
+		contentPanel.add(textFieldConfirm);
+		
 		
 		JButton btnVaciar = new JButton("Vaciar solicitud");
 		btnVaciar.addActionListener(new ActionListener() {
@@ -102,10 +113,38 @@ public class NewUserUI extends JDialog {
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int f=1;
+				if(Arrays.equals(textFieldPassword.getPassword(),textFieldConfirm.getPassword())){
+					lblMsg.setForeground(Color.blue);
+					lblMsg.setText("Solicitud enviada");
+					
+					String user = textFieldUser.getText();
+					char [] pass = textFieldPassword.getPassword();
+					
+					if(f==0){//aca la respuesta del servidor
+						lblMsg.setForeground(Color.red);
+						lblMsg.setText("El nombre de usuario ya está siendo utilizado");
+						textFieldUser.requestFocus();
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario", JOptionPane.INFORMATION_MESSAGE);
+						
+						NewUserUI.this.dispose();
+						MainUI.acceso(1);
+					}
+				}
+				else{
+					lblMsg.setForeground(Color.red);
+					lblMsg.setText("Las contraseñas no coinciden.");
+					textFieldPassword.requestFocus();
+				}
 			}
 		});
-		btnEnviar.setBounds(154, 137, 120, 30);
+		btnEnviar.setBounds(27, 168, 120, 30);
 		contentPanel.add(btnEnviar);
+		
+	
+		
 		
 //		JButton btnCancelar = new JButton("Cancelar");
 //		btnCancelar.addActionListener(new ActionListener() {

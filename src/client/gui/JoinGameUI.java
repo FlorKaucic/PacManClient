@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JoinGameUI extends JFrame {
 
@@ -58,6 +60,12 @@ public class JoinGameUI extends JFrame {
 		nickname.setColumns(30);
 		
 		JButton button = new JButton("Unirse a partida");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+			}
+			
+		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBounds(107, 90, 180, 40);
 		contentPane.add(button);
