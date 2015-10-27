@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import client.conn.Connection;
+
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
@@ -17,6 +20,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.util.Properties;
 import java.awt.Font;
 import java.awt.Toolkit;
 
@@ -29,7 +37,7 @@ public class MainUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,10 +58,10 @@ public class MainUI extends JFrame {
 		}
 	}
 	
-	public static void acceso(int i){ //hay que cambiar las entradas por lo que sea que necesite
-		//accede y cierra la ventana actual
-		JOptionPane.showMessageDialog(null, "Se accede al juego", "", JOptionPane.INFORMATION_MESSAGE);
-	}
+//	public static void acceso(int i){ //hay que cambiar las entradas por lo que sea que necesite
+//		//accede y cierra la ventana actual
+//		JOptionPane.showMessageDialog(null, "Se accede al juego", "", JOptionPane.INFORMATION_MESSAGE);
+//	}
 	
 
 	/**
@@ -103,9 +111,11 @@ public class MainUI extends JFrame {
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				textFieldUser.getText(); //aca lo que sea que quieran hacer con esos 2 fields.
+				textFieldUser.getText(); 
 				textFieldPassword.getText();
-				acceso(1);
+//				acceso(1);
+				Connection conn = Connection.getInstance();
+
 			}
 		});
 		btnLogIn.setBounds(105, 190, 180, 40);
@@ -115,10 +125,8 @@ public class MainUI extends JFrame {
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int i = 0;
 				NewUserUI reg = new NewUserUI();
-				reg.setVisible(true);
-				
+				reg.setVisible(true);	
 			}
 		});
 		btnRegister.setBounds(105, 280, 180, 40);
@@ -139,5 +147,6 @@ public class MainUI extends JFrame {
 		lblPacman.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPacman.setBounds(90, 11, 214, 40);
 		contentPane.add(lblPacman);
+		
 	}
 }
