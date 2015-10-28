@@ -1,4 +1,5 @@
 package game.gui;
+import mapa.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,6 +7,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+//import client.gui.MapaUI;
 
 @SuppressWarnings("serial")
 public class GameUI extends JFrame {
@@ -33,12 +36,16 @@ public class GameUI extends JFrame {
 	 */
 	public GameUI() {
 		setTitle("Pacman");
+		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setBounds(0,0,800,600);
+		MapaUI mapa = new MapaUI();
+		mapa.setBounds(0, 0, 550, 500);
+		getContentPane().add(mapa);
+				
 	}
-
 }
