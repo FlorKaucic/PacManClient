@@ -36,16 +36,16 @@ public class GameUI extends JFrame {
 	 */
 	public GameUI() {
 		setTitle("Pacman");
-		getContentPane().setLayout(null);
+		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setBounds(0,0,800,600);
+		setBounds(0,0,800,800);
 		MapaUI mapa = new MapaUI();
-		mapa.setBounds(0, 0, 550, 500);
-		getContentPane().add(mapa);
+		mapa.setLocation(100,100);
+		contentPane.add(mapa);
 				
 	}
 }
