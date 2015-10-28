@@ -12,29 +12,43 @@ import javax.swing.JPanel;
 
 public class MapaUI extends JPanel {
 
-	int x=0;
-	int y=0;
+	int x = 0;
+	int y = 0;
 	Mapa map;
 	private BufferedImage image;
-	/** * Create the panel.*/
+
+	/** * Create the panel. */
 	@Override
 	protected void paintComponent(Graphics g) {
-		int c;
+//		int c;
 		super.paintComponent(g);
-		
-		for(int i=0; i<11;i++)
-			for(int j=0; j<10;j++){
-				c = map.obtenerValor(i, j)/8;
-				//g.drawImage(image.getSubimage((c*50), 0, 50, 50), (j*50)+50, (i*50)+50, null); 
-				g.drawImage(image, 
-							50+(j*50),50+(i*50) ,(j*50)+100 ,(i*50)+100, 
-							c*50,0 ,(c*50)+50 ,50 ,null);
-		}
+//
+//		for (int i = 0; i < 11; i++)
+//			for (int j = 0; j < 10; j++) {
+//				c = map.obtenerValor(i, j) / 8;
+//				// g.drawImage(image.getSubimage((c*50), 0, 50, 50), (j*50)+50,
+//				// (i*50)+50, null);
+////				g.drawImage(image, 
+////						50 + (j * 50), 50 + (i * 50), (j * 50) + 100, (i * 50) + 100,
+////						c * 50, 0, (c * 50) + 50, 50, 
+////						null);
+//				g.drawImage(image, 
+//						j * 50, i * 50, (j+1) * 50, (i+1) * 50,
+//						c * 50, 0, (c * 50) + 50, 50, 
+//						null);
+//			}
 	}
 
+<<<<<<< HEAD
+=======
+	public void movePos() {
+
+	}
+
+>>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 	public MapaUI() {
 		setLayout(null);
-		setBounds(30, 24, 500, 550);
+		setSize(500, 550);
 		
 		try {
 			map = LectorMapa.leerMapa("mapa.in");
@@ -43,5 +57,6 @@ public class MapaUI extends JPanel {
 			e.printStackTrace();
 		}
 		
+
 	}
 }
