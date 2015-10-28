@@ -41,7 +41,7 @@ public class GameUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-<<<<<<< HEAD
+
 		contentPane.setLayout(null);
 		
 		/*JPanel panelmapa = new JPanel();
@@ -49,19 +49,18 @@ public class GameUI extends JFrame {
 		contentPane.add(panelmapa);
 		*/
 		setBounds(0,0,800,700);
-=======
+
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setBounds(0,0,800,800);
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
+
 		MapaUI mapa = new MapaUI();
-<<<<<<< HEAD
+
 		mapa.setBounds(0, 0, 550, 500);
 		//panelmapa.add(mapa);
 		getContentPane().add(mapa);
-=======
+
 		mapa.setLocation(100,100);
 		contentPane.add(mapa);
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 				
 	}
 }

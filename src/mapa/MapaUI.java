@@ -39,13 +39,7 @@ public class MapaUI extends JPanel {
 //			}
 	}
 
-<<<<<<< HEAD
-=======
-	public void movePos() {
 
-	}
-
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 	public MapaUI() {
 		setLayout(null);
 		setSize(500, 550);
