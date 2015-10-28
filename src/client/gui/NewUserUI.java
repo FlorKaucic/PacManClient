@@ -117,18 +117,16 @@ public class NewUserUI extends JDialog {
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				int f = 1;
-				if (textFieldUser.getText().equals("") || Arrays.equals(textFieldPassword.getPassword(), null)
-						|| Arrays.equals(textFieldConfirm.getPassword(), null)) {
-					lblMsg.setForeground(Color.red);
-					lblMsg.setText("No puede haber campos vacíos");
-				} else {
-					if (Arrays.equals(textFieldPassword.getPassword(), textFieldConfirm.getPassword())) {
-						lblMsg.setForeground(Color.blue);
-						lblMsg.setText("Solicitud enviada");
-
-						String user = textFieldUser.getText();
-						char[] pass = textFieldPassword.getPassword();
-
+				String user = textFieldUser.getText();
+				char[] pass = textFieldPassword.getPassword();
+				char [] passConfirm = textFieldConfirm.getPassword();
+				String msg="";
+				try{
+					Validacion.isRegistValid(user, pass, passConfirm);
+					
+					lblMsg.setForeground(Color.blue);
+					lblMsg.setText("Solicitud enviada");
+						
 						if (f == 0) {//aca la respuesta del servidor
 							lblMsg.setForeground(Color.red);
 							lblMsg.setText("El nombre de usuario ya está siendo utilizado");
@@ -141,11 +139,10 @@ public class NewUserUI extends JDialog {
 
 							// Aca Diego puso un acceso(1) mugroso
 						}
-					} else {
-						lblMsg.setForeground(Color.red);
-						lblMsg.setText("Las contraseñas no coinciden.");
-						textFieldPassword.requestFocus();
-					}
+				}
+				catch(Exception ex){
+					lblMsg.setForeground(Color.red);
+					lblMsg.setText(ex.getMessage());
 				}
 			}
 		});

@@ -31,9 +31,7 @@ public class MapaUI extends JPanel {
 							c*50,0 ,(c*50)+50 ,50 ,null);
 		}
 	}
-	public void movePos(){
-		
-	}
+
 	public MapaUI() {
 		setLayout(null);
 		setBounds(30, 24, 500, 550);

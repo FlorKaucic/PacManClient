@@ -41,10 +41,16 @@ public class GameUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setBounds(0,0,800,600);
+		contentPane.setLayout(null);
+		
+		/*JPanel panelmapa = new JPanel();
+		panelmapa.setBounds(39, 34, 532, 343);
+		contentPane.add(panelmapa);
+		*/
+		setBounds(0,0,800,700);
 		MapaUI mapa = new MapaUI();
 		mapa.setBounds(0, 0, 550, 500);
+		//panelmapa.add(mapa);
 		getContentPane().add(mapa);
 				
 	}
