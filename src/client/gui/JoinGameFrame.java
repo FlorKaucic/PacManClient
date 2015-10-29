@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class JoinGameUI extends JFrame {
+public class JoinGameFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nickname;
@@ -27,7 +27,7 @@ public class JoinGameUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JoinGameUI frame = new JoinGameUI();
+					JoinGameFrame frame = new JoinGameFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class JoinGameUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JoinGameUI() {
+	public JoinGameFrame() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setTitle("Pacman");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

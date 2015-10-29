@@ -1,5 +1,5 @@
 package game.gui;
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,10 +8,9 @@ import javax.swing.border.EmptyBorder;
 
 import game.map.*;
 
-//import client.gui.MapaUI;
 
 @SuppressWarnings("serial")
-public class GameUI extends JFrame {
+public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -22,7 +21,7 @@ public class GameUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameUI frame = new GameUI();
+					GameFrame frame = new GameFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,17 +33,19 @@ public class GameUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GameUI() {
+	public GameFrame() {
 		setTitle("Pacman");
 		setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(0,0,800,800);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setBounds(0,0,800,800);
-		MapPanel map = new MapPanel();
-		map.setLocation(100,100);
-		contentPane.add(map);
+		contentPane.setLayout(null);		
+
+		MapPanel mapa = new MapPanel();
+		mapa.setLocation(100,100);
+		contentPane.add(mapa);
 	}
 }

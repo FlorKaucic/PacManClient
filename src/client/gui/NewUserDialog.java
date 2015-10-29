@@ -7,6 +7,9 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import client.logic.Validacion;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
@@ -21,7 +24,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
-public class NewUserUI extends JDialog {
+public class NewUserDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldUser;
@@ -33,7 +36,7 @@ public class NewUserUI extends JDialog {
 	 */
 	public void main(String[] args) {
 		try {
-			NewUserUI dialog = new NewUserUI();
+			NewUserDialog dialog = new NewUserDialog();
 			dialog.setVisible(true);
 
 		} catch (Exception e) {
@@ -46,14 +49,14 @@ public class NewUserUI extends JDialog {
 		int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar",
 				JOptionPane.OK_CANCEL_OPTION);
 		if (opc == JOptionPane.OK_OPTION) {
-			NewUserUI.this.dispose();
+			NewUserDialog.this.dispose();
 		}
 	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public NewUserUI() {
+	public NewUserDialog() {
 		setBounds(100, 100, 450, 300);
 		this.setTitle("Pacman - Solicitud de Registro");
 		this.setModal(true);
@@ -117,18 +120,16 @@ public class NewUserUI extends JDialog {
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				int f = 1;
-				if (textFieldUser.getText().equals("") || Arrays.equals(textFieldPassword.getPassword(), null)
-						|| Arrays.equals(textFieldConfirm.getPassword(), null)) {
-					lblMsg.setForeground(Color.red);
-					lblMsg.setText("No puede haber campos vacíos");
-				} else {
-					if (Arrays.equals(textFieldPassword.getPassword(), textFieldConfirm.getPassword())) {
-						lblMsg.setForeground(Color.blue);
-						lblMsg.setText("Solicitud enviada");
-
-						String user = textFieldUser.getText();
-						char[] pass = textFieldPassword.getPassword();
-
+				String user = textFieldUser.getText();
+				char[] pass = textFieldPassword.getPassword();
+				char [] passConfirm = textFieldConfirm.getPassword();
+				String msg="";
+				try{
+					Validacion.isRegistValid(user, pass, passConfirm);
+					
+					lblMsg.setForeground(Color.blue);
+					lblMsg.setText("Solicitud enviada");
+						
 						if (f == 0) {//aca la respuesta del servidor
 							lblMsg.setForeground(Color.red);
 							lblMsg.setText("El nombre de usuario ya está siendo utilizado");
@@ -137,15 +138,14 @@ public class NewUserUI extends JDialog {
 							JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
 									JOptionPane.INFORMATION_MESSAGE);
 
-							NewUserUI.this.dispose();
+							NewUserDialog.this.dispose();
 
 							// Aca Diego puso un acceso(1) mugroso
 						}
-					} else {
-						lblMsg.setForeground(Color.red);
-						lblMsg.setText("Las contraseñas no coinciden.");
-						textFieldPassword.requestFocus();
-					}
+				}
+				catch(Exception ex){
+					lblMsg.setForeground(Color.red);
+					lblMsg.setText(ex.getMessage());
 				}
 			}
 		});

@@ -16,7 +16,7 @@ import java.awt.Font;
 import java.awt.Insets;
 
 @SuppressWarnings("serial")
-public class InstructionsUI extends JDialog {
+public class HowToPlayDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -25,7 +25,7 @@ public class InstructionsUI extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			InstructionsUI dialog = new InstructionsUI();
+			HowToPlayDialog dialog = new HowToPlayDialog();
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class InstructionsUI extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public InstructionsUI() {
+	public HowToPlayDialog() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds(dim.width / 2 - 335, dim.height / 2 - 225, 670, 450);
 		this.setModal(true);

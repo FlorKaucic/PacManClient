@@ -3,6 +3,7 @@ package game.map;
 import java.awt.Component;
 import java.awt.Graphics;
 
+@SuppressWarnings("serial")
 public class Tile extends Component {
 	private int valor = 0;
 	private int x = 0;

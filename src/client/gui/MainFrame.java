@@ -29,7 +29,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
-public class MainUI extends JFrame {
+public class MainFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUser;
 	private JTextField textFieldPassword;
@@ -41,7 +41,7 @@ public class MainUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainUI frame = new MainUI();
+					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +67,7 @@ public class MainUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainUI() {
+	public MainFrame() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -125,7 +125,7 @@ public class MainUI extends JFrame {
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NewUserUI reg = new NewUserUI();
+				NewUserDialog reg = new NewUserDialog();
 				reg.setVisible(true);	
 			}
 		});
@@ -136,7 +136,7 @@ public class MainUI extends JFrame {
 		btnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnInstructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InstructionsUI instr = new InstructionsUI();
+				HowToPlayDialog instr = new HowToPlayDialog();
 				instr.setVisible(true);
 			}
 		});
