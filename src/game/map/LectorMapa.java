@@ -1,4 +1,4 @@
-package mapa;
+package game.map;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,8 +6,8 @@ import java.io.FileReader;
 
 public class LectorMapa {
 
-	public static Mapa leerMapa(String ruta){
-		Mapa map = null;
+	public static int[][] leerMapa(String ruta){
+		int[][] map = null;
 	    File file= null;
 	    FileReader fr= null;
 	    BufferedReader br= null;
@@ -19,20 +19,17 @@ public class LectorMapa {
 			file = new File(ruta);
 			fr = new FileReader(file);
 			br = new BufferedReader(fr); 
+			
 			linea = br.readLine();
-			while(linea != null){	 
+			int f = Integer.parseInt(linea.split(" ")[0]);
+			int c = Integer.parseInt(linea.split(" ")[1]);
+			map = new int[f][c];
+			
+			while((linea=br.readLine()) != null){	 
 				data = linea.split(" ");
-			  	if(map == null){
-			  		map = new Mapa(Integer.parseInt(data[0]),Integer.parseInt(data[1]));
-			  	}
-			  	else
-			  	{
-			  		map.cargarFila(nf,data);
-			  		System.out.println(map.obtenerFila(nf));
-			  		nf++;
-			  	} 
-			  	
-			  	linea = br.readLine();
+				for(int i=0;i<c;i++)
+					map[nf][i]=Math.floorDiv(Integer.parseInt(data[i]), 8);
+			  	nf++;
 			}		 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,12 +1,12 @@
 package game.gui;
-import mapa.*;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import game.map.*;
 
 //import client.gui.MapaUI;
 
@@ -41,11 +41,10 @@ public class GameUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 		setBounds(0,0,800,800);
-		MapaUI mapa = new MapaUI();
-		mapa.setLocation(100,100);
-		contentPane.add(mapa);
-				
+		MapPanel map = new MapPanel();
+		map.setLocation(100,100);
+		contentPane.add(map);
 	}
 }
