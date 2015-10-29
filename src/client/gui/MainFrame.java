@@ -56,13 +56,7 @@ public class MainFrame extends JFrame {
 		if (opc == JOptionPane.OK_OPTION) {
 			System.exit(0);
 		}
-	}
-	
-//	public static void acceso(int i){ //hay que cambiar las entradas por lo que sea que necesite
-//		//accede y cierra la ventana actual
-//		JOptionPane.showMessageDialog(null, "Se accede al juego", "", JOptionPane.INFORMATION_MESSAGE);
-//	}
-	
+	}	
 
 	/**
 	 * Create the frame.

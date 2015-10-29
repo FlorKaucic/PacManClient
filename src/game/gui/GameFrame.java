@@ -1,8 +1,14 @@
 package game.gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -36,14 +42,25 @@ public class GameFrame extends JFrame {
 	public GameFrame() {
 		setTitle("Pacman");
 		setLayout(null);
-		setBounds(0,0,800,800);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		setBounds(dim.width / 2 - 400, dim.height / 2 - 400, 800, 800);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar",
+						JOptionPane.OK_CANCEL_OPTION);
+				if (opc == JOptionPane.OK_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);		
-
+		
 		MapPanel mapa = new MapPanel();
 		mapa.setLocation(100,100);
 		contentPane.add(mapa);
