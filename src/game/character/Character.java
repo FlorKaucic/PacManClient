@@ -34,7 +34,7 @@ public class Character extends Component {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void paint(Graphics g) {
 		g.drawImage(this.img, 
 				this.posY, this.posX, this.posY + this.largo, this.posX + this.ancho,
@@ -46,5 +46,9 @@ public class Character extends Component {
 		vida++;
 		if(vida==vidatotal)
 			vida = 0;
+	}
+	
+	public void setY(int y){
+		this.imgY = this.largo * y;
 	}
 }

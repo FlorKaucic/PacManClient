@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
+	MapPanel mapa;
 
 	/**
 	 * Launch the application.
@@ -64,18 +65,37 @@ public class GameFrame extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent k) {
-				if(k.getKeyCode()==KeyEvent.VK_LEFT){
-					repaint();
-				}
-					
+				if(k.getKeyCode()==KeyEvent.VK_LEFT)
+					mapa.changePacmanDir(0);
+				if(k.getKeyCode()==KeyEvent.VK_RIGHT)
+					mapa.changePacmanDir(1);
+				if(k.getKeyCode()==KeyEvent.VK_UP)
+					mapa.changePacmanDir(2);
+				if(k.getKeyCode()==KeyEvent.VK_DOWN)
+					mapa.changePacmanDir(3);			
 			}
 		});
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);		
 		
-		MapPanel mapa = new MapPanel();
-		mapa.setLocation(100,100);
+		mapa = new MapPanel();
+		mapa.setLocation(150,50);
 		contentPane.add(mapa);
+		
+		Thread t = new Thread() {
+		    public void run() {
+		    	while(true){
+					repaint();
+					try{
+						Thread.sleep(150);
+					}catch(Exception e){
+						System.out.println("Error");
+					}
+				}
+		    }
+		};
+		t.start();
 	}
 }

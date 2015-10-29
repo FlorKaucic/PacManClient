@@ -26,8 +26,8 @@ public class MapPanel extends JPanel {
 		pacman.incVida();
 	}
 
-	public void movePos() {
-
+	public void changePacmanDir(int y) {
+		pacman.setY(y);
 	}
 
 	public MapPanel() {
