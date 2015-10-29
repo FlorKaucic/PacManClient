@@ -8,18 +8,22 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import game.character.Character;
+
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel {
 	private final int width = 500;
 	private final int height = 550;
 	public static BufferedImage IMAGE;
 	private int[][] map;
+	Character pacman;
 	
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
 		for (Component c : this.getComponents())
 			c.paint(g);
+		pacman.incVida();
 	}
 
 	public void movePos() {
@@ -40,7 +44,13 @@ public class MapPanel extends JPanel {
 		if(map!=null)
 			for (int i = 0; i < 11; i++)
 				for (int j = 0; j < 10; j++)
-					this.add(new Tile(i*50,j*50, map[i][j]));
+					this.add(new Tile(j*50,i*50, map[i][j]));
+		
+		pacman = new Character(407,228,"pacman.png");
+		
+		add(pacman);
+		
+		
 
 	}
 }

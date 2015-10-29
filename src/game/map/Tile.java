@@ -17,7 +17,7 @@ public class Tile extends Component {
 	
 	public void paint(Graphics g) {
 		g.drawImage(MapPanel.IMAGE, 
-				this.y, this.x, this.y+50, this.x+50,
+				this.x, this.y, this.x+50, this.y+50,
 				this.valor * 50, 0, (this.valor + 1) * 50, 50, 
 				null);
 	}

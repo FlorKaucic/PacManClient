@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import game.map.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 @SuppressWarnings("serial")
@@ -34,6 +36,8 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
+		
+		
 	}
 
 	/**
@@ -41,7 +45,7 @@ public class GameFrame extends JFrame {
 	 */
 	public GameFrame() {
 		setTitle("Pacman");
-		setLayout(null);
+		getContentPane().setLayout(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds(dim.width / 2 - 400, dim.height / 2 - 400, 800, 800);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -57,6 +61,15 @@ public class GameFrame extends JFrame {
 		});
 		
 		contentPane = new JPanel();
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent k) {
+				if(k.getKeyCode()==KeyEvent.VK_LEFT){
+					repaint();
+				}
+					
+			}
+		});
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);		
