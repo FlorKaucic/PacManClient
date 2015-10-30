@@ -22,6 +22,7 @@ public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
 	MapPanel mapa;
+	int pacDir=-1;
 
 	/**
 	 * Launch the application.
@@ -53,7 +54,7 @@ public class GameFrame extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar",
+				int opc = JOptionPane.showConfirmDialog(null, "Abandonas? Cagon!"/*"¿Realmente desea salir?"*/, "Cerrar",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (opc == JOptionPane.OK_OPTION) {
 					System.exit(0);
@@ -65,14 +66,25 @@ public class GameFrame extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent k) {
+				
+				if(k.getKeyCode()==KeyEvent.VK_LEFT || k.getKeyCode()==KeyEvent.VK_RIGHT ||
+					k.getKeyCode()==KeyEvent.VK_UP ||k.getKeyCode()==KeyEvent.VK_DOWN)
+					mapa.setStart();
+					
+					
 				if(k.getKeyCode()==KeyEvent.VK_LEFT)
-					mapa.changePacmanDir(0);
+					pacDir=0;
+					//mapa.changePacmanDir(0);
 				if(k.getKeyCode()==KeyEvent.VK_RIGHT)
-					mapa.changePacmanDir(1);
+					pacDir=1;
+					//mapa.changePacmanDir(1);
 				if(k.getKeyCode()==KeyEvent.VK_UP)
-					mapa.changePacmanDir(2);
+					pacDir=2;
+					//mapa.changePacmanDir(2);
 				if(k.getKeyCode()==KeyEvent.VK_DOWN)
-					mapa.changePacmanDir(3);			
+					pacDir=3;
+					
+				mapa.changePacmanDir(pacDir);
 			}
 		});
 		
@@ -87,9 +99,10 @@ public class GameFrame extends JFrame {
 		Thread t = new Thread() {
 		    public void run() {
 		    	while(true){
+		    		mapa.getPacman().changePos(pacDir);
 					repaint();
 					try{
-						Thread.sleep(150);
+						Thread.sleep(50);
 					}catch(Exception e){
 						System.out.println("Error");
 					}

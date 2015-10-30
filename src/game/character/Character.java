@@ -21,11 +21,12 @@ public class Character extends Component {
 	private int imgY;
 	private int vida;
 	private final int vidatotal = 4;
+	private int dir;
 
 	public Character(int posX, int posY, String img) {
 		this.posX = posX;
 		this.posY = posY;
-		this.vida = 0;
+		this.vida = 1;
 		this.imgX = 0;
 		this.imgY = 0;
 		try {
@@ -35,9 +36,42 @@ public class Character extends Component {
 		}
 	}
 	
+	public int getPosX(){
+		return posX;
+	}
+	public int getPosY(){
+		return posY;
+	}
+	
+	public void setPosX(int i){
+		posX = i;
+	}
+	public void setPosY(int i){
+		posY= i;
+	}
+	
+
+	public void changePos(int dir){		
+		if(dir==0)
+			this.setPosX(this.getPosX()-4);
+		
+		if(dir==1)
+			this.setPosX(this.getPosX()+4);
+		
+		if (dir==2)
+			this.setPosY(this.getPosY()-4);
+		
+		if (dir==3)
+			this.setPosY(this.getPosY()+4);
+	}
+	
 	public void paint(Graphics g) {
+		//g.drawImage(this.img, 
+				//this.posY, this.posX, this.posY + this.largo, this.posX + this.ancho,
+				//this.imgX + vida * this.ancho, this.imgY, this.imgX + (vida + 1) * this.ancho, this.imgY + this.largo, 
+				//null);
 		g.drawImage(this.img, 
-				this.posY, this.posX, this.posY + this.largo, this.posX + this.ancho,
+				this.posX, this.posY, this.posX + this.largo, this.posY + this.ancho,
 				this.imgX + vida * this.ancho, this.imgY, this.imgX + (vida + 1) * this.ancho, this.imgY + this.largo, 
 				null);
 	}
@@ -50,5 +84,6 @@ public class Character extends Component {
 	
 	public void setY(int y){
 		this.imgY = this.largo * y;
+		dir = y;
 	}
 }

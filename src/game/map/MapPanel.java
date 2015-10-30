@@ -17,17 +17,27 @@ public class MapPanel extends JPanel {
 	public static BufferedImage IMAGE;
 	private int[][] map;
 	Character pacman;
+	boolean start = false;
 	
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
 		for (Component c : this.getComponents())
 			c.paint(g);
+		if(start)
 		pacman.incVida();
 	}
 
 	public void changePacmanDir(int y) {
 		pacman.setY(y);
+	}
+	
+	public Character getPacman(){
+		return pacman;
+	}
+	
+	public void setStart(){
+		start = true;
 	}
 
 	public MapPanel() {
@@ -46,7 +56,7 @@ public class MapPanel extends JPanel {
 				for (int j = 0; j < 10; j++)
 					this.add(new Tile(j*50,i*50, map[i][j]));
 		
-		pacman = new Character(407,228,"pacman.png");
+		pacman = new Character(228,407,"pacman.png");
 		
 		add(pacman);
 		
