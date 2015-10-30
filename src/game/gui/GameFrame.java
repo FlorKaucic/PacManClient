@@ -70,7 +70,7 @@ public class GameFrame extends JFrame {
 				if(k.getKeyCode()==KeyEvent.VK_LEFT || k.getKeyCode()==KeyEvent.VK_RIGHT ||
 					k.getKeyCode()==KeyEvent.VK_UP ||k.getKeyCode()==KeyEvent.VK_DOWN)
 					mapa.setStart();
-					
+				System.out.println(k.getKeyCode());
 					
 				if(k.getKeyCode()==KeyEvent.VK_LEFT)
 					pacDir=0;
