@@ -12,9 +12,9 @@ import game.character.Character;
 
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel {
-	private final int width = 500;
-	private final int height = 550;
-	public static BufferedImage IMAGE;
+	private int width = 0;
+	private int height = 0;
+	public static BufferedImage MAP_IMAGE = null;
 	private int[][] map;
 	Character pacman;
 	boolean start = false;
@@ -42,19 +42,28 @@ public class MapPanel extends JPanel {
 
 	public MapPanel() {
 		setLayout(null);
-		setSize(this.width, this.height);
-
+		
 		try {
-			IMAGE = ImageIO.read(new File("res/img/map.png"));
+			MAP_IMAGE = ImageIO.read(new File("res/img/map.png"));
 			map = LectorMapa.leerMapa("res/borrar/map_0.in");
+			this.height = map.length * 50;
+			this.width = map[0].length * 50;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		setSize(this.width, this.height);
+		
 		if (map != null)
 			for (int i = 0; i < 11; i++)
-				for (int j = 0; j < 10; j++)
-					this.add(new Tile(j * 50, i * 50, map[i][j]));
+				for (int j = 0; j < 10; j++){
+					this.add(new Dibujable(j * 50, i * 50, 50, 50, MAP_IMAGE, Math.floorDiv(map[i][j], 8)));
+					int bolita = Math.floorDiv(Math.floorMod(map[i][j], 8),2);
+					if(bolita==1)
+						this.add(new Dibujable(j * 50 + 19, i * 50 + 19, 12, 12));
+					if(bolita==2)
+						this.add(new Dibujable(j * 50 + 15, i * 50 + 15, 20, 20));
+				}
 
 		pacman = new Character(228, 407, "res/img/pacman.png");
 

@@ -28,7 +28,7 @@ public class LectorMapa {
 			while((linea=br.readLine()) != null){	 
 				data = linea.split(" ");
 				for(int i=0;i<c;i++)
-					map[nf][i]=Math.floorDiv(Integer.parseInt(data[i]), 8);
+					map[nf][i]=Integer.parseInt(data[i]);
 			  	nf++;
 			}		 
 		} catch (Exception e) {

@@ -15,8 +15,8 @@ public class Character extends Component {
 	private int posX;
 	private int posY;
 	private Image img;
-	private final int ancho = 40;
-	private final int largo = 40;
+	private final int ancho = 30;
+	private final int largo = 30;
 	private int imgX;
 	private int imgY;
 	private int vida;
