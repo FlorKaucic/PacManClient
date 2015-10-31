@@ -35,54 +35,50 @@ public class Character extends Component {
 			e.printStackTrace();
 		}
 	}
-	
-	public int getPosX(){
+
+	public int getPosX() {
 		return posX;
 	}
-	public int getPosY(){
+
+	public int getPosY() {
 		return posY;
 	}
-	
-	public void setPosX(int i){
+
+	public void setPosX(int i) {
 		posX = i;
 	}
-	public void setPosY(int i){
-		posY= i;
-	}
-	
 
-	public void changePos(int dir){		
-		if(dir==0)
-			this.setPosX(this.getPosX()-4);
-		
-		if(dir==1)
-			this.setPosX(this.getPosX()+4);
-		
-		if (dir==2)
-			this.setPosY(this.getPosY()-4);
-		
-		if (dir==3)
-			this.setPosY(this.getPosY()+4);
+	public void setPosY(int i) {
+		posY = i;
 	}
-	
+
+	public void changePos(int dir) {
+		if (dir == 0)
+			this.setPosX(this.getPosX() - 4);
+
+		if (dir == 1)
+			this.setPosY(this.getPosY() - 4);
+
+		if (dir == 2)
+			this.setPosX(this.getPosX() + 4);
+
+		if (dir == 3)
+			this.setPosY(this.getPosY() + 4);
+	}
+
 	public void paint(Graphics g) {
-		//g.drawImage(this.img, 
-				//this.posY, this.posX, this.posY + this.largo, this.posX + this.ancho,
-				//this.imgX + vida * this.ancho, this.imgY, this.imgX + (vida + 1) * this.ancho, this.imgY + this.largo, 
-				//null);
-		g.drawImage(this.img, 
-				this.posX, this.posY, this.posX + this.largo, this.posY + this.ancho,
-				this.imgX + vida * this.ancho, this.imgY, this.imgX + (vida + 1) * this.ancho, this.imgY + this.largo, 
+		g.drawImage(this.img, this.posX, this.posY, this.posX + this.largo, this.posY + this.ancho,
+				this.imgX + vida * this.ancho, this.imgY, this.imgX + (vida + 1) * this.ancho, this.imgY + this.largo,
 				null);
 	}
-	
-	public void incVida(){
+
+	public void incVida() {
 		vida++;
-		if(vida==vidatotal)
+		if (vida == vidatotal)
 			vida = 0;
 	}
-	
-	public void setY(int y){
+
+	public void setY(int y) {
 		this.imgY = this.largo * y;
 		dir = y;
 	}

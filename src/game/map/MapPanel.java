@@ -18,49 +18,47 @@ public class MapPanel extends JPanel {
 	private int[][] map;
 	Character pacman;
 	boolean start = false;
-	
+
 	@Override
-	public void paint(Graphics g){
+	public void paint(Graphics g) {
 		super.paint(g);
 		for (Component c : this.getComponents())
 			c.paint(g);
-		if(start)
-		pacman.incVida();
+		if (start)
+			pacman.incVida();
 	}
 
 	public void changePacmanDir(int y) {
 		pacman.setY(y);
 	}
-	
-	public Character getPacman(){
+
+	public Character getPacman() {
 		return pacman;
 	}
-	
-	public void setStart(){
+
+	public void setStart() {
 		start = true;
 	}
 
 	public MapPanel() {
 		setLayout(null);
 		setSize(this.width, this.height);
-		
+
 		try {
-			IMAGE = ImageIO.read(new File("map.png"));
-			map = LectorMapa.leerMapa("map_0.in");
+			IMAGE = ImageIO.read(new File("res/img/map.png"));
+			map = LectorMapa.leerMapa("res/borrar/map_0.in");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		if(map!=null)
+
+		if (map != null)
 			for (int i = 0; i < 11; i++)
 				for (int j = 0; j < 10; j++)
-					this.add(new Tile(j*50,i*50, map[i][j]));
-		
-		pacman = new Character(228,407,"pacman.png");
-		
+					this.add(new Tile(j * 50, i * 50, map[i][j]));
+
+		pacman = new Character(228, 407, "res/img/pacman.png");
+
 		add(pacman);
-		
-		
 
 	}
 }

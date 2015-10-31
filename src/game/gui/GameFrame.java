@@ -16,13 +16,12 @@ import game.map.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
 	MapPanel mapa;
-	int pacDir=-1;
+	int pacDir = -1;
 
 	/**
 	 * Launch the application.
@@ -38,8 +37,7 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
-		
-		
+
 	}
 
 	/**
@@ -54,60 +52,47 @@ public class GameFrame extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int opc = JOptionPane.showConfirmDialog(null, "Abandonas? Cagon!"/*"¿Realmente desea salir?"*/, "Cerrar",
-						JOptionPane.OK_CANCEL_OPTION);
+				int opc = JOptionPane.showConfirmDialog(null, "Abandonas? Cagon!"/* "¿Realmente desea salir?" */,
+						"Cerrar", JOptionPane.OK_CANCEL_OPTION);
 				if (opc == JOptionPane.OK_OPTION) {
 					System.exit(0);
 				}
 			}
 		});
-		
+
 		contentPane = new JPanel();
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent k) {
-				
-				if(k.getKeyCode()==KeyEvent.VK_LEFT || k.getKeyCode()==KeyEvent.VK_RIGHT ||
-					k.getKeyCode()==KeyEvent.VK_UP ||k.getKeyCode()==KeyEvent.VK_DOWN)
+
+				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
 					mapa.setStart();
-				System.out.println(k.getKeyCode());
-					
-				if(k.getKeyCode()==KeyEvent.VK_LEFT)
-					pacDir=0;
-					//mapa.changePacmanDir(0);
-				if(k.getKeyCode()==KeyEvent.VK_RIGHT)
-					pacDir=1;
-					//mapa.changePacmanDir(1);
-				if(k.getKeyCode()==KeyEvent.VK_UP)
-					pacDir=2;
-					//mapa.changePacmanDir(2);
-				if(k.getKeyCode()==KeyEvent.VK_DOWN)
-					pacDir=3;
-					
+					pacDir = k.getKeyCode() - KeyEvent.VK_LEFT;
+				}
 				mapa.changePacmanDir(pacDir);
 			}
 		});
-		
+
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);		
-		
+		contentPane.setLayout(null);
+
 		mapa = new MapPanel();
-		mapa.setLocation(150,50);
+		mapa.setLocation(150, 50);
 		contentPane.add(mapa);
-		
+
 		Thread t = new Thread() {
-		    public void run() {
-		    	while(true){
-		    		mapa.getPacman().changePos(pacDir);
+			public void run() {
+				while (true) {
+					mapa.getPacman().changePos(pacDir);
 					repaint();
-					try{
+					try {
 						Thread.sleep(50);
-					}catch(Exception e){
+					} catch (Exception e) {
 						System.out.println("Error");
 					}
 				}
-		    }
+			}
 		};
 		t.start();
 	}

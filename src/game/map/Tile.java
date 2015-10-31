@@ -14,12 +14,10 @@ public class Tile extends Component {
 		this.y = y;
 		this.valor = valor;
 	}
-	
+
 	public void paint(Graphics g) {
-		g.drawImage(MapPanel.IMAGE, 
-				this.x, this.y, this.x+50, this.y+50,
-				this.valor * 50, 0, (this.valor + 1) * 50, 50, 
-				null);
+		g.drawImage(MapPanel.IMAGE, this.x, this.y, this.x + 50, this.y + 50, this.valor * 50, 0, (this.valor + 1) * 50,
+				50, null);
 	}
 
 }
