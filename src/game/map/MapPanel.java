@@ -39,6 +39,34 @@ public class MapPanel extends JPanel {
 	public void setStart() {
 		start = true;
 	}
+	
+	public void movimientos(int dir){
+		int resX=0, resY=0, camino;
+		
+		camino = map[pacman.getPosX()/50][pacman.getPosY()/50]/8;
+	
+		resX = pacman.getPosX()%50;
+		resY = pacman.getPosY()%50;
+		if ((resX<= 5 && dir ==0) || 
+			(resX>= 45 - pacman.getAncho() && dir==2) ||
+			(resY <= 5 && dir==1)||
+			(resY >= 45 - pacman.getLargo() && dir==3))		
+				if(puedeSeguir(dir, camino)){
+					pacman.changePos(-1);
+					return;
+				}
+		
+		pacman.changePos(dir);
+		
+		/*if (collision()){
+			ya = -1;
+			y = game.racquet.getTopY() - DIAMETER;
+		}
+		x = x + xa;
+		y = y + ya;
+		*/
+		
+	}
 
 	public MapPanel() {
 		setLayout(null);
@@ -60,14 +88,28 @@ public class MapPanel extends JPanel {
 					this.add(new Dibujable(j * 50, i * 50, 50, 50, MAP_IMAGE, Math.floorDiv(map[i][j], 8)));
 					int bolita = Math.floorDiv(Math.floorMod(map[i][j], 8),2);
 					if(bolita==1)
-						this.add(new Dibujable(j * 50 + 19, i * 50 + 19, 12, 12));
+						this.add(new Dibujable(j * 50 + 19, i * 50 + 19, 8, 8));
 					if(bolita==2)
-						this.add(new Dibujable(j * 50 + 15, i * 50 + 15, 20, 20));
+						this.add(new Dibujable(j * 50 + 15, i * 50 + 15, 15, 15));
 				}
 
 		pacman = new Character(228, 407, "res/img/pacman.png");
 
 		add(pacman);
-
+		
 	}
+	public boolean puedeSeguir(int dir, int cam){
+		if(dir==0 && (cam==2 || cam==3 || cam==5 || cam==8))
+			return false;
+		if(dir==1 && (cam==1 || cam==5 || cam==6 || cam==8))
+			return false;
+		if(dir==2 && (cam==2 || cam==3 || cam==5 || cam==8))
+			return false;
+		if(dir==3 && (cam==1 || cam==3 || cam==4 || cam==10))
+			return false;
+		
+		
+		return true;
+	}
+	
 }

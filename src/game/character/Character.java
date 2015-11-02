@@ -22,7 +22,7 @@ public class Character extends Component {
 	private int vida;
 	private final int vidatotal = 4;
 	private int dir;
-
+	
 	public Character(int posX, int posY, String img) {
 		this.posX = posX;
 		this.posY = posY;
@@ -50,6 +50,13 @@ public class Character extends Component {
 
 	public void setPosY(int i) {
 		posY = i;
+	}
+	
+	public int getLargo(){
+		return largo;
+	}
+	public int getAncho(){
+		return ancho;
 	}
 
 	public void changePos(int dir) {

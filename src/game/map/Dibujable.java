@@ -16,7 +16,8 @@ public class Dibujable extends Component {
 	protected Integer imgY;
 	protected int width;
 	protected int height;
-
+	private byte efec=0; 
+	
 	public Dibujable(int posX, int posY, int width, int height) {
 		this.posX = posX;
 		this.posY = posY;
@@ -46,7 +47,16 @@ public class Dibujable extends Component {
 			return;
 		}
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setColor(Color.ORANGE);
+		if(efec>0){		
+			g.setColor(Color.ORANGE);
+		}
+		else{
+			g.setColor(Color.WHITE);
+		}
+		efec++;
+		if(efec==15)
+			efec = -15;
+		
 		g.fillOval(posX, posY, width, height);
 	}
 }
