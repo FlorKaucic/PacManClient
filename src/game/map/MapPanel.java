@@ -29,6 +29,7 @@ public class MapPanel extends JPanel {
 	}
 
 	public void changePacmanDir(int y) {
+		
 		pacman.setY(y);
 	}
 
@@ -41,31 +42,70 @@ public class MapPanel extends JPanel {
 	}
 	
 	public void movimientos(int dir){
-		int resX=0, resY=0, camino;
+		int resX1=0, resY1=0, resX2, resY2, camino;
 		
-		camino = map[pacman.getPosX()/50][pacman.getPosY()/50]/8;
-	
-		resX = pacman.getPosX()%50;
-		resY = pacman.getPosY()%50;
-		if ((resX<= 5 && dir ==0) || 
-			(resX>= 45 - pacman.getAncho() && dir==2) ||
-			(resY <= 5 && dir==1)||
-			(resY >= 45 - pacman.getLargo() && dir==3))		
-				if(puedeSeguir(dir, camino)){
-					pacman.changePos(-1);
-					return;
-				}
-		
+
 		pacman.changePos(dir);
 		
-		/*if (collision()){
-			ya = -1;
-			y = game.racquet.getTopY() - DIAMETER;
-		}
-		x = x + xa;
-		y = y + ya;
-		*/
+		resX1 = pacman.getPosX()%50;
+		resX2 = (pacman.getPosX()+pacman.getAncho())%50;
+		resY1 = pacman.getPosY()%50;
+		resY2 = (pacman.getPosY()+pacman.getLargo())%50;
 		
+		
+		if(pacman.getPosX()+pacman.getAncho()>=0 && pacman.getPosX() <=500){
+			if (resX1<=5 && dir ==0){
+				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
+				if((pacman.getPosY()/50 != (pacman.getPosY()+pacman.getLargo())/50) ||
+				   (!puedeSeguir(dir, camino))){
+					pacman.setVel(0);
+					pacman.setPosX(pacman.getPosX()+5-resX1);
+					return;
+				}
+			}
+			else
+			if(resX2>= 45 && dir==2){
+				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
+				if((pacman.getPosY()/50 != (pacman.getPosY()+pacman.getLargo())/50) ||
+				   (!puedeSeguir(dir, camino))){
+					pacman.setVel(0);
+					pacman.setPosX(pacman.getPosX()-(resX2-45));
+					return;
+				}
+			}
+			else
+			if(resY1 <= 5 && dir==1){
+				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
+				if((pacman.getPosX()/50 != (pacman.getPosX()+pacman.getAncho())/50) ||
+				   (!puedeSeguir(dir, camino))){
+					pacman.setVel(0);
+					pacman.setPosY(pacman.getPosY()+5-resY1);
+					return;
+				}
+			}else
+			if(resY2 >= 45 && dir==3){
+				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
+				if((pacman.getPosX()/50 != (pacman.getPosX()+pacman.getAncho())/50) ||
+				   (!puedeSeguir(dir, camino))){
+					pacman.setVel(0);
+					pacman.setPosY(pacman.getPosY()-(resY2-45));
+					System.out.println("resX1: " + resX1 + " - resX2: " + resX2+
+							" - resY1: " + resY1 + " - resY2: " + resY2+ " - camino: " + camino +
+							" - difY1: " + (pacman.getPosY()/50) + " - difY2: " + ((pacman.getPosY()+pacman.getLargo())/50) +
+							" - difX1: " + (pacman.getPosX()/50) + " - difX2: " +((pacman.getPosX()+pacman.getLargo())/50));
+					return;
+				}		
+			}
+			else{
+				pacman.setVel(4);
+				
+				
+			}
+		}
+		else if(pacman.getPosX()+pacman.getAncho()<0)
+			pacman.setPosX(500);
+			else
+				pacman.setPosX(-pacman.getAncho());
 	}
 
 	public MapPanel() {
@@ -99,13 +139,17 @@ public class MapPanel extends JPanel {
 		
 	}
 	public boolean puedeSeguir(int dir, int cam){
-		if(dir==0 && (cam==2 || cam==3 || cam==5 || cam==8))
+		if(dir==0)
+			if(cam==2 || cam==3 || cam==5 || cam==8)
 			return false;
-		if(dir==1 && (cam==1 || cam==5 || cam==6 || cam==8))
+		if(dir==3) 
+			if(cam==1 || cam==5 || cam==6 || cam==9)
 			return false;
-		if(dir==2 && (cam==2 || cam==3 || cam==5 || cam==8))
+		if(dir==2) 
+			if(cam==2 || cam==4 || cam==6 || cam==7)
 			return false;
-		if(dir==3 && (cam==1 || cam==3 || cam==4 || cam==10))
+		if(dir==1)
+			if(cam==1 || cam==3 || cam==4 || cam==10)
 			return false;
 		
 		

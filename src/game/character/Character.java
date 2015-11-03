@@ -22,6 +22,7 @@ public class Character extends Component {
 	private int vida;
 	private final int vidatotal = 4;
 	private int dir;
+	private int vel; //esto iria en la clase de cada personaje
 	
 	public Character(int posX, int posY, String img) {
 		this.posX = posX;
@@ -29,6 +30,7 @@ public class Character extends Component {
 		this.vida = 1;
 		this.imgX = 0;
 		this.imgY = 0;
+		vel = 4;
 		try {
 			this.img = ImageIO.read(new File(img));
 		} catch (IOException e) {
@@ -52,6 +54,10 @@ public class Character extends Component {
 		posY = i;
 	}
 	
+	public void setVel(int v){
+		vel = v;
+	}
+	
 	public int getLargo(){
 		return largo;
 	}
@@ -61,16 +67,16 @@ public class Character extends Component {
 
 	public void changePos(int dir) {
 		if (dir == 0)
-			this.setPosX(this.getPosX() - 4);
+			this.setPosX(this.getPosX() - vel);
 
 		if (dir == 1)
-			this.setPosY(this.getPosY() - 4);
+			this.setPosY(this.getPosY() - vel);
 
 		if (dir == 2)
-			this.setPosX(this.getPosX() + 4);
+			this.setPosX(this.getPosX() + vel);
 
 		if (dir == 3)
-			this.setPosY(this.getPosY() + 4);
+			this.setPosY(this.getPosY() + vel);
 	}
 
 	public void paint(Graphics g) {

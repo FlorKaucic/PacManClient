@@ -69,8 +69,9 @@ public class GameFrame extends JFrame {
 					mapa.setStart();
 					charDir = k.getKeyCode() - KeyEvent.VK_LEFT;
 				}
-	
+				System.out.println(charDir);
 				mapa.changePacmanDir(charDir);
+				
 			}
 		});
 
