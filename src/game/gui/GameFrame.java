@@ -66,7 +66,7 @@ public class GameFrame extends JFrame {
 			public void keyPressed(KeyEvent k) {
 
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
-					mapa.setStart();
+					mapa.setStart(true);
 					charDir = k.getKeyCode() - KeyEvent.VK_LEFT;
 				}
 

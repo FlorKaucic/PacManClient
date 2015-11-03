@@ -37,8 +37,8 @@ public class MapPanel extends JPanel {
 		return pacman;
 	}
 
-	public void setStart() {
-		start = true;
+	public void setStart(boolean b) {
+		start = b;
 	}
 	
 	public void movimientos(int dir){
@@ -57,6 +57,7 @@ public class MapPanel extends JPanel {
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosX(pacman.getPosX()+5-resX1);
+					this.setStart(false);
 					return;
 				}
 			}
@@ -67,6 +68,7 @@ public class MapPanel extends JPanel {
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosX(pacman.getPosX()-(resX2-45));
+					this.setStart(false);
 					return;
 				}
 			}
@@ -77,6 +79,7 @@ public class MapPanel extends JPanel {
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosY(pacman.getPosY()+5-resY1);
+					this.setStart(false);
 					return;
 				}
 			}else
@@ -86,6 +89,7 @@ public class MapPanel extends JPanel {
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosY(pacman.getPosY()-(resY2-45));
+					this.setStart(false);
 					return;
 				}		
 			}
