@@ -91,7 +91,10 @@ public class MapPanel extends JPanel {
 			}
 			else{
 				pacman.setVel(4);
-				
+				if(dir==0 || dir== 2)
+					pacman.setPosY((pacman.getPosY()/50)*50+(50-pacman.getLargo())/2);
+				if(dir==1 || dir == 3)
+					pacman.setPosX((pacman.getPosX()/50)*50+(50-pacman.getAncho())/2);
 				
 			}
 		}
@@ -99,6 +102,8 @@ public class MapPanel extends JPanel {
 			pacman.setPosX(500);
 			else
 				pacman.setPosX(-pacman.getAncho());
+		
+		pacman.changePos(dir);
 	}
 
 	public MapPanel() {

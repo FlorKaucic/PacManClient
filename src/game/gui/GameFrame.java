@@ -87,7 +87,7 @@ public class GameFrame extends JFrame {
 			public void run() {
 				while (true) {
 					mapa.movimientos(charDir);
-					mapa.getPacman().changePos(charDir);
+					//mapa.getPacman().changePos(charDir);
 					
 					repaint();
 					try {
