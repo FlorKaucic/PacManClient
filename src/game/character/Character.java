@@ -45,6 +45,10 @@ public class Character extends Component {
 	public int getPosY() {
 		return posY;
 	}
+	
+	public int getDir(){
+		return dir;
+	}
 
 	public void setPosX(int i) {
 		posX = i;

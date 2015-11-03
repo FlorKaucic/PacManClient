@@ -29,8 +29,7 @@ public class MapPanel extends JPanel {
 	}
 
 	public void changePacmanDir(int y) {
-		
-		pacman.setY(y);
+			pacman.setY(y);
 	}
 
 	public Character getPacman() {
@@ -43,17 +42,18 @@ public class MapPanel extends JPanel {
 	
 	public void movimientos(int dir){
 		int resX1=0, resY1=0, resX2, resY2, camino;
-		
+				
 		resX1 = pacman.getPosX()%50;
 		resX2 = (pacman.getPosX()+pacman.getAncho())%50;
 		resY1 = pacman.getPosY()%50;
 		resY2 = (pacman.getPosY()+pacman.getLargo())%50;
 		
+
 		
 		if(pacman.getPosX()+pacman.getAncho()>=0 && pacman.getPosX() <=500){
 			if (resX1<=5 && dir ==0){
 				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
-				if((pacman.getPosY()/50 != (pacman.getPosY()+pacman.getLargo())/50) ||
+				if(/*(pacman.getPosY()/50 != (pacman.getPosY()+pacman.getLargo())/50) ||*/
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosX(pacman.getPosX()+5-resX1);
@@ -64,7 +64,7 @@ public class MapPanel extends JPanel {
 			else
 			if(resX2>= 45 && dir==2){
 				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
-				if((pacman.getPosY()/50 != (pacman.getPosY()+pacman.getLargo())/50) ||
+				if(/*(pacman.getPosY()/50 != (pacman.getPosY()+pacman.getLargo())/50) ||*/
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosX(pacman.getPosX()-(resX2-45));
@@ -75,7 +75,7 @@ public class MapPanel extends JPanel {
 			else
 			if(resY1 <= 5 && dir==1){
 				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
-				if((pacman.getPosX()/50 != (pacman.getPosX()+pacman.getAncho())/50) ||
+				if(/*(pacman.getPosX()/50 != (pacman.getPosX()+pacman.getAncho())/50) ||*/
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosY(pacman.getPosY()+5-resY1);
@@ -85,7 +85,7 @@ public class MapPanel extends JPanel {
 			}else
 			if(resY2 >= 45 && dir==3){
 				camino = map[pacman.getPosY()/50][pacman.getPosX()/50]/8;	
-				if((pacman.getPosX()/50 != (pacman.getPosX()+pacman.getAncho())/50) ||
+				if(/*(pacman.getPosX()/50 != (pacman.getPosX()+pacman.getAncho())/50) ||*/
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosY(pacman.getPosY()-(resY2-45));
@@ -94,20 +94,40 @@ public class MapPanel extends JPanel {
 				}		
 			}
 			else{
-				pacman.setVel(4);
-				if(dir==0 || dir== 2)
-					pacman.setPosY((pacman.getPosY()/50)*50+(50-pacman.getLargo())/2);
-				if(dir==1 || dir == 3)
-					pacman.setPosX((pacman.getPosX()/50)*50+(50-pacman.getAncho())/2);
 				
+				if(this.corregirCurso(dir)){
+					pacman.setVel(4);
+					
+				}
+					else{
+					pacman.setVel(0);
+					this.setStart(false);
+					}
 			}
+				
+			
 		}
 		else if(pacman.getPosX()+pacman.getAncho()<0)
 			pacman.setPosX(500);
 			else
 				pacman.setPosX(-pacman.getAncho());
 		
-		pacman.changePos(dir);
+		
+		pacman.changePos(dir);	
+	}
+	
+	private boolean corregirCurso(int dir){
+		
+		if(pacman.getPosX()%50<=(50/2) && (dir==1 || dir==3)){
+			pacman.setPosX((pacman.getPosX()/50)*50+(50-pacman.getAncho())/2);
+			return true;
+		}
+		if(pacman.getPosY()%50<=(50/2) && (dir==0 || dir==2)){
+			pacman.setPosY((pacman.getPosY()/50)*50+(50-pacman.getLargo())/2);
+			return true;
+		}
+
+		return false;
 	}
 
 	public MapPanel() {
@@ -158,4 +178,31 @@ public class MapPanel extends JPanel {
 		return true;
 	}
 	
+	public boolean puedeGirar(int dir){
+		int cam = map[pacman.getPosY()/50][pacman.getPosX()/50]/8; 
+		
+		if(pacman.getPosX()%50>(50/2) && (dir==1 || dir==3))
+			return false;
+		
+		if(pacman.getPosY()%50>(50/2) && (dir==0 || dir==2))
+			return false;
+		
+		if(dir==0)
+			if((cam==2 || cam==3 || cam==5 || cam==8) && pacman.getPosX()%50<11)  
+			return false;
+		if(dir==3) 
+			if(cam==1 || cam==5 || cam==6 || cam==9 && pacman.getPosY()%50<11)
+			return false;
+		if(dir==2) 
+			if(cam==2 || cam==4 || cam==6 || cam==7 && pacman.getPosX()%50<11)
+			return false;
+		if(dir==1)
+			if(cam==1 || cam==3 || cam==4 || cam==10 && pacman.getPosY()%50<11)
+			return false;
+		
+
+		return true;
+	
+		
+	}
 }

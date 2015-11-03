@@ -64,13 +64,16 @@ public class GameFrame extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent k) {
-
+				int aux;
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
-					mapa.setStart(true);
-					charDir = k.getKeyCode() - KeyEvent.VK_LEFT;
+					aux = k.getKeyCode() - KeyEvent.VK_LEFT;
+					if(mapa.puedeGirar(aux)){
+						mapa.setStart(true);
+						charDir = aux;
+					}
 				}
-
-				mapa.changePacmanDir(charDir);
+				
+					mapa.changePacmanDir(charDir);
 				
 			}
 		});
