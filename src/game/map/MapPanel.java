@@ -44,9 +44,6 @@ public class MapPanel extends JPanel {
 	public void movimientos(int dir){
 		int resX1=0, resY1=0, resX2, resY2, camino;
 		
-
-		pacman.changePos(dir);
-		
 		resX1 = pacman.getPosX()%50;
 		resX2 = (pacman.getPosX()+pacman.getAncho())%50;
 		resY1 = pacman.getPosY()%50;
@@ -89,10 +86,6 @@ public class MapPanel extends JPanel {
 				   (!puedeSeguir(dir, camino))){
 					pacman.setVel(0);
 					pacman.setPosY(pacman.getPosY()-(resY2-45));
-					System.out.println("resX1: " + resX1 + " - resX2: " + resX2+
-							" - resY1: " + resY1 + " - resY2: " + resY2+ " - camino: " + camino +
-							" - difY1: " + (pacman.getPosY()/50) + " - difY2: " + ((pacman.getPosY()+pacman.getLargo())/50) +
-							" - difX1: " + (pacman.getPosX()/50) + " - difX2: " +((pacman.getPosX()+pacman.getLargo())/50));
 					return;
 				}		
 			}
