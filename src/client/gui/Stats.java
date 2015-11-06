@@ -1,16 +1,14 @@
 package client.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 
+@SuppressWarnings("serial")
 public class Stats extends JFrame {
 
 	private JPanel contentPane;
@@ -21,6 +19,7 @@ public class Stats extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Stats frame = new Stats();
@@ -37,7 +36,7 @@ public class Stats extends JFrame {
 	 */
 	public Stats() {
 		setTitle("Pacoman - Estadisticas");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
