@@ -39,7 +39,7 @@ public class NewUserDialog extends JDialog {
 			dialog.setVisible(true);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -140,7 +140,6 @@ public class NewUserDialog extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 
 							NewUserDialog.this.dispose();
-
 						}
 				}
 				catch(Exception ex){

@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.SystemColor;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Insets;
 
@@ -28,7 +30,7 @@ public class HowToPlayDialog extends JDialog {
 			HowToPlayDialog dialog = new HowToPlayDialog();
 			dialog.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -53,7 +55,7 @@ public class HowToPlayDialog extends JDialog {
 			File instr = new File("res/otro.html");
 			instrucciones = new JEditorPane(instr.toURI().toURL());
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
 			instrucciones = new JEditorPane("text/html",
 					"<center>No se encontr&oacute; la p&aacute;gina de instrucciones.</center>");
 		}
