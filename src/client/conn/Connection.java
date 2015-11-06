@@ -25,6 +25,8 @@ public class Connection {
 		try {
 			ip = InetAddress.getByName(Config.get("ip"));
 		} catch (UnknownHostException e1) {
+			
+			
 			JOptionPane.showMessageDialog(null, 
 					"No se puede obtener la direccion de IP.", 
 					"Error de conexion", JOptionPane.ERROR_MESSAGE);

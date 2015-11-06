@@ -2,6 +2,8 @@ package client.conn;
 
 import java.io.BufferedReader;
 
+import javax.swing.JOptionPane;
+
 public class ServerListener extends Thread {
 	BufferedReader in = null;
 	
@@ -21,7 +23,7 @@ public class ServerListener extends Thread {
 			}
 			in.close();
 		} catch (Exception e) {
-			System.err.println("Fallo.");
+			JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}

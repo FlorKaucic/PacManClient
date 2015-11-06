@@ -96,7 +96,7 @@ public class GameFrame extends JFrame {
 					try {
 						Thread.sleep(50);
 					} catch (Exception e) {
-						System.out.println("Error");
+						JOptionPane.showMessageDialog(null, "Error Thread.", "Cliente", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}

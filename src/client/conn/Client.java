@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import javax.swing.JOptionPane;
+
 public class Client {
 	public static void main(String[] args) {
 		
@@ -43,10 +45,10 @@ public class Client {
 			stdIn.close();
 			socket.close();
 		}catch (UnknownHostException e){
-			System.err.println("Host desconocido.\n"+e);
+			JOptionPane.showMessageDialog(null, "Host desconocido.", "Cliente", JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		} catch (IOException e) {
-			System.err.println("Error al conectar con el host solicitado.\n"+e);
+			JOptionPane.showMessageDialog(null, "Error al conectar con el host solicitado.", "Cliente", JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
 	}

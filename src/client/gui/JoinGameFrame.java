@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.JButton;
@@ -31,7 +32,7 @@ public class JoinGameFrame extends JFrame {
 					JoinGameFrame frame = new JoinGameFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
