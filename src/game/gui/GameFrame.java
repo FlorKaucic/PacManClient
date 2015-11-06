@@ -1,6 +1,5 @@
 package game.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -10,6 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import game.map.*;
@@ -28,6 +28,7 @@ public class GameFrame extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					GameFrame frame = new GameFrame();
@@ -48,7 +49,7 @@ public class GameFrame extends JFrame {
 		getContentPane().setLayout(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds(dim.width / 2 - 400, dim.height / 2 - 400, 800, 800);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -87,6 +88,7 @@ public class GameFrame extends JFrame {
 		contentPane.add(mapa);
 
 		Thread t = new Thread() {
+			@Override
 			public void run() {
 				while (true) {
 					mapa.movimientos(charDir);

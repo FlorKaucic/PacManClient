@@ -1,6 +1,5 @@
 package client.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -11,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,6 +25,7 @@ public class JoinGameFrame extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					JoinGameFrame frame = new JoinGameFrame();
@@ -40,7 +41,7 @@ public class JoinGameFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public JoinGameFrame() {
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		setTitle("Pacman");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds(dim.width / 2 - 200, dim.height / 2 - 225, 400, 450);
@@ -61,6 +62,7 @@ public class JoinGameFrame extends JFrame {
 		
 		JButton button = new JButton("Unirse a partida");
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
 			}

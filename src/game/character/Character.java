@@ -8,8 +8,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import game.map.MapPanel;
-
 @SuppressWarnings("serial")
 public class Character extends Component {
 	private int posX;
@@ -83,6 +81,7 @@ public class Character extends Component {
 			this.setPosY(this.getPosY() + vel);
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		g.drawImage(this.img, this.posX, this.posY, this.posX + this.largo, this.posY + this.ancho,
 				this.imgX + vida * this.ancho, this.imgY, this.imgX + (vida + 1) * this.ancho, this.imgY + this.largo,

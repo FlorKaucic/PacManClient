@@ -9,23 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
-import client.conn.Connection;
-
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
-
+import javax.swing.WindowConstants;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.util.Properties;
 import java.awt.Font;
 import java.awt.Toolkit;
 
@@ -42,6 +35,7 @@ public class MainFrame extends JFrame {
 		Config.load();
 		
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					MainFrame frame = new MainFrame();
@@ -65,7 +59,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -107,6 +101,7 @@ public class MainFrame extends JFrame {
 		JButton btnLogIn = new JButton("Acceder");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogIn.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				textFieldUser.getText(); 
 				textFieldPassword.getText();
@@ -119,6 +114,7 @@ public class MainFrame extends JFrame {
 		JButton btnRegister = new JButton("Registrarse");
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegister.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				NewUserDialog reg = new NewUserDialog();
 				reg.setVisible(true);	
@@ -130,6 +126,7 @@ public class MainFrame extends JFrame {
 		JButton btnInstructions = new JButton("Instrucciones");
 		btnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnInstructions.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				HowToPlayDialog instr = new HowToPlayDialog();
 				instr.setVisible(true);
