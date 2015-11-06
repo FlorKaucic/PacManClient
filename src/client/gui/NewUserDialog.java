@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import client.logic.Validacion;
+import client.logic.Validator;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -125,7 +125,7 @@ public class NewUserDialog extends JDialog {
 				char [] passConfirm = textFieldConfirm.getPassword();
 				String msg="";
 				try{
-					Validacion.isRegistValid(user, pass, passConfirm);
+					Validator.isUserValid(user, pass, passConfirm);
 					
 					lblMsg.setForeground(Color.blue);
 					lblMsg.setText("Solicitud enviada");
@@ -140,7 +140,6 @@ public class NewUserDialog extends JDialog {
 
 							NewUserDialog.this.dispose();
 
-							// Aca Diego puso un acceso(1) mugroso
 						}
 				}
 				catch(Exception ex){
@@ -151,14 +150,5 @@ public class NewUserDialog extends JDialog {
 		});
 		btnEnviar.setBounds(27, 168, 120, 30);
 		contentPanel.add(btnEnviar);
-
-		//		JButton btnCancelar = new JButton("Cancelar");
-		//		btnCancelar.addActionListener(new ActionListener() {
-		//			public void actionPerformed(ActionEvent e) {
-		//				cerrarVentana();
-		//			}
-		//		});
-		//		btnCancelar.setBounds(287, 181, 120, 30);
-		//		contentPanel.add(btnCancelar);
 	}
 }

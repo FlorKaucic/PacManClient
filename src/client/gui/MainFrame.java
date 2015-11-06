@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.config.Config;
 import client.conn.Connection;
 
 import javax.swing.JLabel;
@@ -37,7 +38,9 @@ public class MainFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {		
+	public static void main(String[] args) {	
+		Config.load();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -107,8 +110,6 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				textFieldUser.getText(); 
 				textFieldPassword.getText();
-//				acceso(1);
-				Connection conn = Connection.getInstance();
 
 			}
 		});
