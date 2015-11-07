@@ -21,5 +21,5 @@ public class ClientProtocol {
 				Connection.getInstance().setStatus("LOGGED");
 			}
 			Connection.getInstance().setStatus("FAILED");
-		}	
+		}
 }

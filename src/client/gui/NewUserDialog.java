@@ -131,9 +131,10 @@ public class NewUserDialog extends JDialog {
 
 					lblMsg.setForeground(Color.blue);
 					lblMsg.setText("Solicitud enviada");
-
+					
+					Connection.getInstance().send("LOGUP "+ user + " " + pass.toString());
 					String status;
-
+					
 					while ((status = Connection.getInstance().getStatus()).equals(null)) {
 						//						if (f == 0) {//aca la respuesta del servidor
 						//							lblMsg.setForeground(Color.red);

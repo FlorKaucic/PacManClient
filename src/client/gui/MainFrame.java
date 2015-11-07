@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
+import client.conn.Connection;
+
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
@@ -21,12 +23,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.JPasswordField;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldUser;
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 
 	/**
 	 * Launch the application.
@@ -81,12 +84,6 @@ public class MainFrame extends JFrame {
 		textFieldUser.setColumns(10);
 		textFieldUser.requestFocus();
 
-		textFieldPassword = new JTextField();
-		textFieldPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textFieldPassword.setBounds(139, 147, 180, 20);
-		contentPane.add(textFieldPassword);
-		textFieldPassword.setColumns(10);
-
 		JLabel lblUser = new JLabel("Usuario");
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUser.setBounds(61, 114, 80, 14);
@@ -103,8 +100,23 @@ public class MainFrame extends JFrame {
 		btnLogIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				textFieldUser.getText(); 
-				textFieldPassword.getText();
+				String user = textFieldUser.getText(); 
+				char [] pass= textFieldPassword.getPassword();
+				
+				Connection.getInstance().send("LOGIN "+ user + " " + pass.toString());
+				String status;
+				
+				while ((status = Connection.getInstance().getStatus()).equals(null)) {
+					if (status.equals("FAILED")) {
+						JOptionPane.showMessageDialog(null, "No se puede loguear", "Pacman",
+								JOptionPane.ERROR_MESSAGE);
+						Connection.getInstance().setStatus(null);
+					} else {
+						JoinGameFrame jgf = new JoinGameFrame();
+						jgf.setVisible(true);
+						MainFrame.this.dispose();
+					}
+				}
 
 			}
 		});
@@ -139,6 +151,10 @@ public class MainFrame extends JFrame {
 		lblPacman.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPacman.setBounds(90, 11, 214, 40);
 		contentPane.add(lblPacman);
+		
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setBounds(139, 149, 180, 20);
+		contentPane.add(textFieldPassword);
 		
 	}
 }

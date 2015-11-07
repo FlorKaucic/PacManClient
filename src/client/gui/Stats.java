@@ -3,9 +3,13 @@ package client.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import client.conn.Connection;
+
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
@@ -45,31 +49,47 @@ public class Stats extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		// en algun punto del codigo previo  el table = new JTable(x,y) tendria que obtener las estadisticas de la BD
+
 		String[] nombreColumnas = {"Usuario","Partidas jugadas", "Partidas ganadas","Partidas perdidas"};
+		
+		Connection.getInstance().send("GETALLSTATS");
+				String status;
+				while ((status = Connection.getInstance().getStatus()).equals(null)) {
+					if (status.equals("FAILED")) {
+						JOptionPane.showMessageDialog(null, "No se pudieron obtener las estadísticas", "Estadísticas",
+								JOptionPane.ERROR_MESSAGE);
+						Connection.getInstance().setStatus(null);
+					}
+				}
+	/*	String strIn;//la linea que recibe del server, no se como recibe así que 
+					//pongo esto para despues reemplazarlo por lo que va
+		String []linea;
+		int i=0, j=0; 
+		Object[][]data=null;
+		while((status = Connection.getInstance().getStatus()).equals(null))	{
+			linea = strIn.split(" ");
+			if(linea[0].equals("STAT")){
+
+			data[i][0]=(Integer)i;
+			data[i][1]= linea[1];
+			data[i][2]= new Integer(linea[2]+linea[3]);
+			data[i][3]= new Integer(linea[2]);
+			data[i][4]= new Integer(linea[3]);
+			}
+			if(linea[0].equals("ENDSTAT"))
+				Connection.getInstance().setStatus(null);
+				
+			i++;
+		}
+		*/
+			
 		Object[][] data = {
 				{"001",new Integer(1),new Integer(1),new Integer(0)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
 		};
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 422, 244);

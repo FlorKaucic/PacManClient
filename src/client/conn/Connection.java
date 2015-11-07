@@ -63,7 +63,10 @@ public class Connection {
 		Thread t = new ServerListener(this.in);
 		t.start();
 	}
-
+	
+	public String getIn() throws IOException{
+		return in.readLine();
+	}
 	public String getStatus(){
 		return STATUS;
 	}
