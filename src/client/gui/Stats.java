@@ -89,6 +89,7 @@ public class Stats extends JFrame {
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
+				{"002",new Integer(5),new Integer(2),new Integer(3)},
 
 		};
 		
