@@ -1,11 +1,14 @@
 package client.gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
@@ -67,7 +70,7 @@ public class Stats extends JFrame {
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
-				{"002",new Integer(5),new Integer(2),new Integer(3)},
+				{"999",new Integer(66464),new Integer(4443),new Integer(3897897)},
 		};
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -78,5 +81,10 @@ public class Stats extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(false);
 		table.setEnabled(false);
+		table.setBackground(Color.BLACK);
+		table.setForeground(Color.WHITE);
+		table.setFont(new Font("Arial", Font.PLAIN, 12));
+		table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12)); 
+		//linea anterior: no muestra en WindowsBuilder eso, pero si al ejecutar
 	}
 }
