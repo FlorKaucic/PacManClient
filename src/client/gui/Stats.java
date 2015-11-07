@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
@@ -69,12 +70,13 @@ public class Stats extends JFrame {
 				{"002",new Integer(5),new Integer(2),new Integer(3)},
 		};
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 422, 244);
+		contentPane.add(scrollPane);
+		
 		table = new JTable(data,nombreColumnas);
+		scrollPane.setViewportView(table);
 		table.setRowSelectionAllowed(false);
 		table.setEnabled(false);
-		table.setBounds(10, 27, 400, 228);
-		contentPane.add(table);
-		
-		//table.add(s);
 	}
 }
