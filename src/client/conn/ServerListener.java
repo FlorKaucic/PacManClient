@@ -15,11 +15,7 @@ public class ServerListener extends Thread {
 		try {
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {
-				System.out.println(inputLine);
-				if (inputLine.equals("Se recibio: fin")){
-					System.out.println("Fin.");
-					break;
-				}
+				ClientProtocol.processInput(inputLine);
 			}
 			in.close();
 		} catch (Exception e) {
