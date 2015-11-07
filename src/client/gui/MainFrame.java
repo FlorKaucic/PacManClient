@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
 import client.conn.Connection;
+import game.gui.GameFrame;
 
 import javax.swing.JLabel;
 
@@ -103,7 +104,7 @@ public class MainFrame extends JFrame {
 				String user = textFieldUser.getText(); 
 				char [] pass= textFieldPassword.getPassword();
 				
-				Connection.getInstance().send("LOGIN "+ user + " " + pass.toString());
+				Connection.getInstance().send("LOGIN "+ user + " " + String.valueOf(pass));
 				String status;
 				
 				while ((status = Connection.getInstance().getStatus()).equals(null)) {
@@ -112,8 +113,8 @@ public class MainFrame extends JFrame {
 								JOptionPane.ERROR_MESSAGE);
 						Connection.getInstance().setStatus(null);
 					} else {
-						JoinGameFrame jgf = new JoinGameFrame();
-						jgf.setVisible(true);
+						GameFrame gf = new GameFrame();
+						gf.setVisible(true);
 						MainFrame.this.dispose();
 					}
 				}

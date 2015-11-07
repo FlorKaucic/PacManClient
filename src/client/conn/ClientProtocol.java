@@ -17,6 +17,7 @@ public class ClientProtocol {
 			
 		
 		public static void processInput(String input){
+			System.out.println(input);
 			if(input.startsWith("LOGUPOK") || input.startsWith("LOGINOK")){
 				Connection.getInstance().setStatus("LOGGED");
 			}
