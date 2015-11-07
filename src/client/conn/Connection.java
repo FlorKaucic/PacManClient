@@ -15,7 +15,7 @@ import client.config.Config;
 public class Connection {
 
 	private static Connection INSTANCE = null;
-
+	private static String STATUS = null;
 	private Socket socket = null;
 	private PrintWriter out = null;
 	private BufferedReader in = null;
@@ -64,4 +64,12 @@ public class Connection {
 		t.start();
 	}
 
+	public String getStatus(){
+		return STATUS;
+	}
+	
+	public void setStatus(String change){
+		STATUS = change;
+	}
+	
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import client.config.Config;
 import game.character.Character;
 
 @SuppressWarnings("serial")
@@ -134,10 +135,10 @@ public class MapPanel extends JPanel {
 		setLayout(null);
 		
 		try {
-			MAP_IMAGE = ImageIO.read(new File("res/img/map.png"));
+			MAP_IMAGE = ImageIO.read(new File(Config.get("mapimg")));
 			map = LectorMapa.leerMapa("res/borrar/map_0.in");
-			this.height = map.length * 50;
-			this.width = map[0].length * 50;
+			this.height = map.length * Integer.parseInt(Config.get("tileheigth"));
+			this.width = map[0].length * Integer.parseInt(Config.get("tilewidth"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.conn.Connection;
 import client.logic.Validator;
 
 import javax.swing.JTextField;
@@ -119,30 +120,37 @@ public class NewUserDialog extends JDialog {
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				int f = 1;
 				String user = textFieldUser.getText();
 				char[] pass = textFieldPassword.getPassword();
-				char [] passConfirm = textFieldConfirm.getPassword();
-				String msg="";
-				try{
+				char[] passConfirm = textFieldConfirm.getPassword();
+				String msg = "";
+				try {
 					Validator.isUserValid(user, pass, passConfirm);
-					
+
 					lblMsg.setForeground(Color.blue);
 					lblMsg.setText("Solicitud enviada");
-						
-						if (f == 0) {//aca la respuesta del servidor
-							lblMsg.setForeground(Color.red);
-							lblMsg.setText("El nombre de usuario ya está siendo utilizado");
-							textFieldUser.requestFocus();
+
+					String status;
+
+					while ((status = Connection.getInstance().getStatus()).equals(null)) {
+						//						if (f == 0) {//aca la respuesta del servidor
+						//							lblMsg.setForeground(Color.red);
+						//							lblMsg.setText("El nombre de usuario ya está siendo utilizado");
+						//							textFieldUser.requestFocus();
+						if (status.equals("FAILED")) {
+							JOptionPane.showMessageDialog(null, "No se puede registrar", "Registro de usuario",
+									JOptionPane.ERROR_MESSAGE);
+							Connection.getInstance().setStatus(null);
 						} else {
 							JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
 									JOptionPane.INFORMATION_MESSAGE);
 
 							NewUserDialog.this.dispose();
 						}
-				}
-				catch(Exception ex){
+					}
+				} catch (Exception ex) {
 					lblMsg.setForeground(Color.red);
 					lblMsg.setText(ex.getMessage());
 				}
