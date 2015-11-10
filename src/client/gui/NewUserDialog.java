@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import client.conn.Connection;
 import client.logic.Validator;
+import game.gui.GameFrame;
 
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import java.awt.Font;
@@ -121,36 +123,48 @@ public class NewUserDialog extends JDialog {
 		btnEnviar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int f = 1;
+				//				int f = 1;
 				String user = textFieldUser.getText();
 				char[] pass = textFieldPassword.getPassword();
 				char[] passConfirm = textFieldConfirm.getPassword();
-				String msg = "";
+				//				String msg = "";
 				try {
 					Validator.isUserValid(user, pass, passConfirm);
 
 					lblMsg.setForeground(Color.blue);
 					lblMsg.setText("Solicitud enviada");
-					
-					Connection.getInstance().send("LOGUP "+ user + " " + String.valueOf(pass));
-					
-					String status;
-					
-					while ((status = Connection.getInstance().getStatus()).equals(null)) {
-						//						if (f == 0) {//aca la respuesta del servidor
-						//							lblMsg.setForeground(Color.red);
-						//							lblMsg.setText("El nombre de usuario ya está siendo utilizado");
-						//							textFieldUser.requestFocus();
-						if (status.equals("FAILED")) {
-							JOptionPane.showMessageDialog(null, "No se puede registrar", "Registro de usuario",
-									JOptionPane.ERROR_MESSAGE);
-							Connection.getInstance().setStatus(null);
-						} else {
-							JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
-									JOptionPane.INFORMATION_MESSAGE);
 
-							NewUserDialog.this.dispose();
+					Connection.getInstance().send("LOGUP " + user + " " + String.valueOf(pass));
+
+					BufferedReader in = Connection.getInstance().getBufferedReader();
+
+					try {
+						String inputLine;
+						while ((inputLine = in.readLine()) != null) {
+							if (inputLine.startsWith("LOGUPOK")) {
+								System.out.println("ok "+inputLine);
+								JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
+										JOptionPane.INFORMATION_MESSAGE);
+//								MainFrame mf = (MainFrame) NewUserDialog.this.getOwner().;
+//								mf.setUser(user);
+								System.out.println(NewUserDialog.this.getOwner().getClass());
+								System.out.println(NewUserDialog.this.getParent().getClass());
+								System.out.println(NewUserDialog.this.getOwner().getOwner().getClass());
+								NewUserDialog.this.dispose();
+								break;
+							}
+							if (inputLine.startsWith("LOGUPFAILED")) {
+								System.out.println("failed "+inputLine);
+								JOptionPane.showMessageDialog(null, "No se puede registrar", "Registro de usuario",
+										JOptionPane.ERROR_MESSAGE);
+								break;
+							}
 						}
+						in.close();
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente",
+								JOptionPane.ERROR_MESSAGE);
+						ex.printStackTrace();
 					}
 				} catch (Exception ex) {
 					lblMsg.setForeground(Color.red);

@@ -37,8 +37,8 @@ public class Connection {
 		try{
 			socket = new Socket(ip, port);
 			out = new PrintWriter(socket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			createListener();
+//			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//			createListener();
 			System.out.println("Cargado " + ip + ":" + port);
 		}catch(IOException e){
 			JOptionPane.showMessageDialog(null, 
@@ -55,6 +55,11 @@ public class Connection {
 		return INSTANCE;
 	}
 
+	public BufferedReader getBufferedReader() throws IOException{
+		return new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	}
+	
+	
 	public void send(String message) {
 		out.println(message);
 	}

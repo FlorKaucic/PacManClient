@@ -1,9 +1,10 @@
 package client.config;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
+import java.io.OutputStream;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -26,6 +27,25 @@ public class Config {
 					input.close();
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(null, "No se puede cerrar Input Properties.", "Cliente", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
+	
+	public static void save(){
+		OutputStream output = null;
+		
+		try {
+			output = new FileOutputStream("config.properties");
+			CONFIG.store(output, null);
+		} catch (IOException io) {
+			JOptionPane.showMessageDialog(null, "No se pudieron guardar los cambios en la configuracion.", "Error", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		}

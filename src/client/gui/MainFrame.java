@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JPasswordField;
@@ -62,7 +64,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() {
+	public MainFrame() { 
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -104,21 +106,36 @@ public class MainFrame extends JFrame {
 				String user = textFieldUser.getText(); 
 				char [] pass= textFieldPassword.getPassword();
 				
-				Connection.getInstance().send("LOGIN "+ user + " " + String.valueOf(pass));
-				String status;
+				Connection.getInstance().send("LOGIN " + user + " " + String.valueOf(pass));	
 				
-				while ((status = Connection.getInstance().getStatus()).equals(null)) {
-					if (status.equals("FAILED")) {
-						JOptionPane.showMessageDialog(null, "No se puede loguear", "Pacman",
-								JOptionPane.ERROR_MESSAGE);
-						Connection.getInstance().setStatus(null);
-					} else {
-						GameFrame gf = new GameFrame();
-						gf.setVisible(true);
-						MainFrame.this.dispose();
-					}
-				}
+				try {
+					BufferedReader in = Connection.getInstance().getBufferedReader();
 
+					String inputLine;
+					while ((inputLine = in.readLine()) != null) {
+						if (inputLine.startsWith("LOGINOK")) {
+							System.out.println("ok "+inputLine);
+							JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
+									JOptionPane.INFORMATION_MESSAGE);
+							GameFrame gf = new GameFrame();
+							gf.setVisible(true);
+							MainFrame.this.dispose();
+							break;
+						}
+						
+						if (inputLine.startsWith("LOGINFAILED")) {
+							System.out.println("failed "+inputLine);
+							JOptionPane.showMessageDialog(null, "No se puede registrar", "Registro de usuario",
+									JOptionPane.ERROR_MESSAGE);
+							break;
+						}
+					}
+					in.close();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente",
+							JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
 			}
 		});
 		btnLogIn.setBounds(105, 190, 180, 40);
@@ -157,5 +174,9 @@ public class MainFrame extends JFrame {
 		textFieldPassword.setBounds(139, 149, 180, 20);
 		contentPane.add(textFieldPassword);
 		
+	}
+	
+	public void setUser(String user){
+		this.textFieldUser.setText(user);
 	}
 }
