@@ -15,7 +15,6 @@ import client.config.Config;
 public class Connection {
 
 	private static Connection INSTANCE = null;
-	private static String STATUS = null;
 	private Socket socket = null;
 	private PrintWriter out = null;
 	private BufferedReader in = null;
@@ -37,8 +36,6 @@ public class Connection {
 		try{
 			socket = new Socket(ip, port);
 			out = new PrintWriter(socket.getOutputStream(), true);
-//			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//			createListener();
 			System.out.println("Cargado " + ip + ":" + port);
 		}catch(IOException e){
 			JOptionPane.showMessageDialog(null, 
@@ -63,21 +60,9 @@ public class Connection {
 	public void send(String message) {
 		out.println(message);
 	}
-
-	private void createListener() {
-		Thread t = new ServerListener(this.in);
-		t.start();
-	}
 	
 	public String getIn() throws IOException{
 		return in.readLine();
-	}
-	public String getStatus(){
-		return STATUS;
-	}
-	
-	public void setStatus(String change){
-		STATUS = change;
 	}
 	
 }

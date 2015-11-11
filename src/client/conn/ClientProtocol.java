@@ -1,5 +1,9 @@
 package client.conn;
 
+import java.io.BufferedReader;
+
+import javax.swing.JOptionPane;
+
 public class ClientProtocol {
 	// Registrar usuario:
 		// envia
@@ -15,12 +19,35 @@ public class ClientProtocol {
 		// LOGINOK PACMAN/GHOST id nickname
 		// LOGINFAILED [...]
 			
-		
-		public static void processInput(String input){
-			System.out.println(input);
-			if(input.startsWith("LOGUPOK") || input.startsWith("LOGINOK")){
-				Connection.getInstance().setStatus("LOGGED");
+	public static int[][] readMap(){
+		int[][] map = null;
+		Connection.getInstance().send("GETMAP");
+		try {
+			BufferedReader in = Connection.getInstance().getBufferedReader();
+
+			String inputLine;
+			while ((inputLine = in.readLine()) != null) {
+				if (inputLine.startsWith("MAPOK")) {
+					inputLine = inputLine.substring(6);
+					String[] lines = inputLine.split("ELN");
+					String[] tiles = null;
+					map = new int[lines.length][];
+					for(int i = 0; i < lines.length; i++){
+						tiles = lines[i].split(" ");
+						map[i] = new int[tiles.length];
+						for(int j = 0; j < tiles.length; j++){
+							map[i][j] = Integer.parseInt(tiles[j]);
+						}
+					}
+					break;
+				}
 			}
-			Connection.getInstance().setStatus("FAILED");
+			in.close();
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente",
+					JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
 		}
+		return map;
+	}
 }

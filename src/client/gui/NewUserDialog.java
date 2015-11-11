@@ -33,20 +33,6 @@ public class NewUserDialog extends JDialog {
 	private JPasswordField textFieldPassword;
 	private JPasswordField textFieldConfirm;
 
-	/**
-	 * Launch the application.
-	 */
-	public void main(String[] args) {
-		try {
-			NewUserDialog dialog = new NewUserDialog();
-			dialog.setVisible(true);
-
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
-
 	public void cerrarVentana() {
 		int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar",
 				JOptionPane.OK_CANCEL_OPTION);
@@ -145,11 +131,6 @@ public class NewUserDialog extends JDialog {
 								System.out.println("ok "+inputLine);
 								JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
 										JOptionPane.INFORMATION_MESSAGE);
-//								MainFrame mf = (MainFrame) NewUserDialog.this.getOwner().;
-//								mf.setUser(user);
-								System.out.println(NewUserDialog.this.getOwner().getClass());
-								System.out.println(NewUserDialog.this.getParent().getClass());
-								System.out.println(NewUserDialog.this.getOwner().getOwner().getClass());
 								NewUserDialog.this.dispose();
 								break;
 							}

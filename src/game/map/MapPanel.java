@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import client.config.Config;
+import client.conn.ClientProtocol;
 import game.character.Character;
 
 @SuppressWarnings("serial")
@@ -135,10 +136,10 @@ public class MapPanel extends JPanel {
 		setLayout(null);
 		
 		try {
-			MAP_IMAGE = ImageIO.read(new File(Config.get("mapimg")));
-			map = LectorMapa.leerMapa("res/borrar/map_0.in");
-			this.height = map.length * Integer.parseInt(Config.get("tileheigth"));
-			this.width = map[0].length * Integer.parseInt(Config.get("tilewidth"));
+			MAP_IMAGE = ImageIO.read(new File(Config.get("tile_img")));
+			map = ClientProtocol.readMap();
+			this.height = map.length * Integer.parseInt(Config.get("tile_heigth"));
+			this.width = map[0].length * Integer.parseInt(Config.get("tile_width"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,7 +157,7 @@ public class MapPanel extends JPanel {
 						this.add(new Dibujable(j * 50 + 15, i * 50 + 15, 15, 15));
 				}
 
-		pacman = new Character(228, 407, "res/img/pacman.png");
+		pacman = new Character(228, 407, Config.get("pacman_img"));
 
 		add(pacman);
 		

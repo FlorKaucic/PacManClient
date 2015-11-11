@@ -30,6 +30,7 @@ import javax.swing.JPasswordField;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
+	
 	private JPanel contentPane;
 	private JTextField textFieldUser;
 	private JPasswordField textFieldPassword;
@@ -115,8 +116,6 @@ public class MainFrame extends JFrame {
 					while ((inputLine = in.readLine()) != null) {
 						if (inputLine.startsWith("LOGINOK")) {
 							System.out.println("ok "+inputLine);
-							JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
-									JOptionPane.INFORMATION_MESSAGE);
 							GameFrame gf = new GameFrame();
 							gf.setVisible(true);
 							MainFrame.this.dispose();
@@ -125,7 +124,10 @@ public class MainFrame extends JFrame {
 						
 						if (inputLine.startsWith("LOGINFAILED")) {
 							System.out.println("failed "+inputLine);
-							JOptionPane.showMessageDialog(null, "No se puede registrar", "Registro de usuario",
+							JOptionPane.showMessageDialog(null, "No se puede ingresar."
+									+ "\nCompruebe que el nombre de usuario y la contraseña sean correctos."
+									+ "\nSi lo son, su cuenta podria estar deshabilitada por el administrador.",
+									"Ingresar al juego",
 									JOptionPane.ERROR_MESSAGE);
 							break;
 						}

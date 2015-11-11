@@ -23,18 +23,6 @@ public class HowToPlayDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			HowToPlayDialog dialog = new HowToPlayDialog();
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public HowToPlayDialog() {
