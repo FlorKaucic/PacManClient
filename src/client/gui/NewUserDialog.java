@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.conn.ClientProtocol;
 import client.conn.Connection;
 import client.logic.Validator;
 import game.gui.GameFrame;
@@ -79,11 +80,6 @@ public class NewUserDialog extends JDialog {
 		lblConfirmacionDeClave.setBounds(27, 103, 115, 14);
 		contentPanel.add(lblConfirmacionDeClave);
 
-		JLabel lblMsg = new JLabel("");
-		lblMsg.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMsg.setBounds(161, 131, 247, 14);
-		contentPanel.add(lblMsg);
-
 		textFieldPassword = new JPasswordField();
 		textFieldPassword.setBounds(161, 66, 247, 20);
 		contentPanel.add(textFieldPassword);
@@ -92,7 +88,7 @@ public class NewUserDialog extends JDialog {
 		textFieldConfirm.setBounds(161, 97, 247, 20);
 		contentPanel.add(textFieldConfirm);
 
-		JButton btnVaciar = new JButton("Vaciar solicitud");
+		JButton btnVaciar = new JButton("Vaciar");
 		btnVaciar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -117,39 +113,11 @@ public class NewUserDialog extends JDialog {
 				try {
 					Validator.isUserValid(user, pass, passConfirm);
 
-					lblMsg.setForeground(Color.blue);
-					lblMsg.setText("Solicitud enviada");
-
-					Connection.getInstance().send("LOGUP " + user + " " + String.valueOf(pass));
-
-					BufferedReader in = Connection.getInstance().getBufferedReader();
-
-					try {
-						String inputLine;
-						while ((inputLine = in.readLine()) != null) {
-							if (inputLine.startsWith("LOGUPOK")) {
-								System.out.println("ok "+inputLine);
-								JOptionPane.showMessageDialog(null, "Usuario registrado", "Registro de usuario",
-										JOptionPane.INFORMATION_MESSAGE);
-								NewUserDialog.this.dispose();
-								break;
-							}
-							if (inputLine.startsWith("LOGUPFAILED")) {
-								System.out.println("failed "+inputLine);
-								JOptionPane.showMessageDialog(null, "No se puede registrar", "Registro de usuario",
-										JOptionPane.ERROR_MESSAGE);
-								break;
-							}
-						}
-						in.close();
-					} catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente",
-								JOptionPane.ERROR_MESSAGE);
-						ex.printStackTrace();
-					}
+					ClientProtocol.logUp(NewUserDialog.this, user, String.valueOf(pass));
+					
+					JOptionPane.showMessageDialog(null, "Cuenta creada con exito", "Nuevo usuario", JOptionPane.PLAIN_MESSAGE);
 				} catch (Exception ex) {
-					lblMsg.setForeground(Color.red);
-					lblMsg.setText(ex.getMessage());
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

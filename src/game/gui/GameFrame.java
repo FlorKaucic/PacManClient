@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import game.map.*;
+import game.gui.map.*;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

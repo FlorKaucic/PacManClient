@@ -1,4 +1,4 @@
-package game.map;
+package game.gui.map;
 
 import java.awt.Component;
 import java.awt.Graphics;

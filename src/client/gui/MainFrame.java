@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
+import client.conn.ClientProtocol;
 import client.conn.Connection;
 import game.gui.GameFrame;
 
@@ -107,37 +108,7 @@ public class MainFrame extends JFrame {
 				String user = textFieldUser.getText(); 
 				char [] pass= textFieldPassword.getPassword();
 				
-				Connection.getInstance().send("LOGIN " + user + " " + String.valueOf(pass));	
-				
-				try {
-					BufferedReader in = Connection.getInstance().getBufferedReader();
-
-					String inputLine;
-					while ((inputLine = in.readLine()) != null) {
-						if (inputLine.startsWith("LOGINOK")) {
-							System.out.println("ok "+inputLine);
-							GameFrame gf = new GameFrame();
-							gf.setVisible(true);
-							MainFrame.this.dispose();
-							break;
-						}
-						
-						if (inputLine.startsWith("LOGINFAILED")) {
-							System.out.println("failed "+inputLine);
-							JOptionPane.showMessageDialog(null, "No se puede ingresar."
-									+ "\nCompruebe que el nombre de usuario y la contraseña sean correctos."
-									+ "\nSi lo son, su cuenta podria estar deshabilitada por el administrador.",
-									"Ingresar al juego",
-									JOptionPane.ERROR_MESSAGE);
-							break;
-						}
-					}
-					in.close();
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente",
-							JOptionPane.ERROR_MESSAGE);
-					ex.printStackTrace();
-				}
+				ClientProtocol.logIn(MainFrame.this, user, String.valueOf(pass));
 			}
 		});
 		btnLogIn.setBounds(105, 190, 180, 40);
