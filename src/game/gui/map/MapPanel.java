@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import client.config.Config;
-import client.conn.ClientProtocol;
+import client.conn.CommManager;
 import game.character.Character;
 
 @SuppressWarnings("serial")
@@ -137,7 +137,7 @@ public class MapPanel extends JPanel {
 		
 		try {
 			MAP_IMAGE = ImageIO.read(new File(Config.get("tile_img")));
-			map = ClientProtocol.readMap();
+			map = CommManager.readMap();
 			this.height = map.length * Integer.parseInt(Config.get("tile_heigth"));
 			this.width = map[0].length * Integer.parseInt(Config.get("tile_width"));
 		} catch (Exception e) {

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import client.conn.ClientProtocol;
+import client.conn.CommManager;
 import client.conn.Connection;
 import client.logic.Validator;
 import game.gui.GameFrame;
@@ -113,7 +113,7 @@ public class NewUserDialog extends JDialog {
 				try {
 					Validator.isUserValid(user, pass, passConfirm);
 
-					ClientProtocol.logUp(NewUserDialog.this, user, String.valueOf(pass));
+					CommManager.logUp(NewUserDialog.this, user, String.valueOf(pass));
 					
 					JOptionPane.showMessageDialog(null, "Cuenta creada con exito", "Nuevo usuario", JOptionPane.PLAIN_MESSAGE);
 				} catch (Exception ex) {

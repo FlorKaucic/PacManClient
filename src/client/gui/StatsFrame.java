@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
+import client.conn.CommManager;
 import client.conn.Connection;
 
 import javax.swing.JTable;
@@ -22,7 +23,6 @@ public class StatsFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	Object[][] data = null;
 
 	/**
 	 * Create the frame.
@@ -37,36 +37,7 @@ public class StatsFrame extends JFrame {
 
 		String[] nombreColumnas = { "Usuario", "Partidas jugadas", "Partidas ganadas", "Partidas perdidas" };
 
-		Connection.getInstance().send("GETALLSTATS");
-
-		try {
-			BufferedReader in = Connection.getInstance().getBufferedReader();
-			String input;
-			
-			while ((input = in.readLine()) != null) {
-				if (input.startsWith("STATSOK")) {
-					String[] linea = input.substring(6).split(" ");
-					data = new Object[linea.length/3][4];
-					for (int i = 0; i < linea.length - 3; i += 3) {
-						data[i/3][0] = linea[i+1];
-						data[i/3][1] = new Integer(Integer.parseInt(linea[i + 2]) + Integer.parseInt(linea[i + 3]));
-						data[i/3][2] = new Integer(linea[i + 2]);
-						data[i/3][3] = new Integer(linea[i + 3]);
-					}
-					break;
-				}
-				if (input.startsWith("STATSFAILED")) {
-					JOptionPane.showMessageDialog(null, "No se pudieron obtener las estadísticas", "Estadísticas",
-							JOptionPane.ERROR_MESSAGE);
-					break;
-				}
-			}
-			
-			in.close();
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente", JOptionPane.ERROR_MESSAGE);
-			ex.printStackTrace();
-		}
+		Object[][] data = CommManager.getStats();
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 422, 244);

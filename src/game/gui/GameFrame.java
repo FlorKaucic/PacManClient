@@ -49,7 +49,7 @@ public class GameFrame extends JFrame {
 		setTitle("Pacman");
 		getContentPane().setLayout(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(dim.width / 2 - 400, dim.height / 2 - 400, 800, 800);
+		setBounds(dim.width / 2 - 400, dim.height / 2 - 350, 800, 700);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override

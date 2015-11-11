@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
-import client.conn.ClientProtocol;
+import client.conn.CommManager;
 import client.conn.Connection;
 import game.gui.GameFrame;
 
@@ -108,7 +108,7 @@ public class MainFrame extends JFrame {
 				String user = textFieldUser.getText(); 
 				char [] pass= textFieldPassword.getPassword();
 				
-				ClientProtocol.logIn(MainFrame.this, user, String.valueOf(pass));
+				CommManager.logIn(MainFrame.this, user, String.valueOf(pass));
 			}
 		});
 		btnLogIn.setBounds(105, 190, 180, 40);
