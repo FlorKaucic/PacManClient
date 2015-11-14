@@ -1,17 +1,12 @@
 package client.gui;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import client.config.Config;
-import client.conn.CommManager;
 import client.conn.Connection;
-import game.gui.GameFrame;
 
 import javax.swing.JLabel;
 
@@ -23,37 +18,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JPasswordField;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class LogInFrame extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField textFieldUser;
 	private JPasswordField textFieldPassword;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {	
-		Config.load();
-		
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Cliente", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
-	}
 
 	public void cerrarVentana() {
 		int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar",
@@ -66,7 +40,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() { 
+	public LogInFrame() { 
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -107,19 +81,35 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String user = textFieldUser.getText(); 
 				char [] pass= textFieldPassword.getPassword();
-				
-				CommManager.logIn(MainFrame.this, user, String.valueOf(pass));
+								
+				Connection.getInstance().send("LOGIN " + user + " " + String.valueOf(pass));
+				LogInFrame.this.dispose();
 			}
 		});
-		btnLogIn.setBounds(105, 190, 180, 40);
+		btnLogIn.setBounds(15, 190, 160, 40);
 		contentPane.add(btnLogIn);
+		
+		JButton btnAsViewer = new JButton("Solo ver");
+		btnAsViewer.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAsViewer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String user = textFieldUser.getText(); 
+				char [] pass= textFieldPassword.getPassword();
+								
+				Connection.getInstance().send("LOGIN VIEWER" + user + " " + String.valueOf(pass));
+				LogInFrame.this.dispose();
+			}
+		});
+		btnAsViewer.setBounds(205, 190, 160, 40);
+		contentPane.add(btnAsViewer);
 
 		JButton btnRegister = new JButton("Registrarse");
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegister.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				NewUserDialog reg = new NewUserDialog();
+				LogUpDialog reg = new LogUpDialog();
 				reg.setVisible(true);	
 			}
 		});

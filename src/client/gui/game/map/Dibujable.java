@@ -1,4 +1,4 @@
-package game.gui.map;
+package client.gui.game.map;
 
 import java.awt.Color;
 import java.awt.Component;

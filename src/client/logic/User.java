@@ -1,36 +1,32 @@
 package client.logic;
 
+import client.logic.builder.UserBuilder;
+
 public class User {
 	private int id;
-	private String username;
 	private String nickname;
+	private String profile;	
 	
-	public User(String username){
-		this.username = username;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public User(UserBuilder builder){
+		this.id = builder.getId();
+		this.nickname = builder.getNickname();
+		this.profile = builder.getProfile();
 	}
 
 	public int getId() {
 		return id;
 	}
 	
-	public String setUsername(String username) {
-		return username;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getProfile() {
+		return profile;
 	}
 
 }

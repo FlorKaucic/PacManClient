@@ -1,7 +1,6 @@
-package game.gui;
+package client.gui.game;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -12,7 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import game.gui.map.*;
+import client.gui.game.map.*;
+import client.logic.User;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -20,32 +20,24 @@ import java.awt.event.KeyEvent;
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
 
+	private static GameFrame INSTANCE;
+	
+	private User user;
+	
 	private JPanel contentPane;
 	MapPanel mapa;
 	int charDir = -1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					GameFrame frame = new GameFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
+	public static GameFrame getInstance(){
+		if(INSTANCE == null)
+			INSTANCE = new GameFrame();
+		return INSTANCE;
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public GameFrame() {
+	private GameFrame() {
 		setTitle("Pacman");
 		getContentPane().setLayout(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -66,17 +58,9 @@ public class GameFrame extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent k) {
-				int aux;
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
-					aux = k.getKeyCode() - KeyEvent.VK_LEFT;
-					if(mapa.puedeGirar(aux)){
-						mapa.setStart(true);
-						charDir = aux;
-					}
-				}
-				
-					mapa.changePacmanDir(charDir);
-				
+					mapa.rotateCharacter(k.getKeyCode() - KeyEvent.VK_LEFT);
+				}				
 			}
 		});
 
@@ -84,7 +68,11 @@ public class GameFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		mapa = new MapPanel();
+		
+	}
+	
+	public void setMap(int[][] map){
+		mapa = new MapPanel(map);
 		mapa.setLocation(150, 50);
 		contentPane.add(mapa);
 
@@ -92,10 +80,10 @@ public class GameFrame extends JFrame {
 			@Override
 			public void run() {
 				while (true) {
-					mapa.movimientos(charDir);
 					repaint();
+					mapa.update();
 					try {
-						Thread.sleep(50);
+						Thread.sleep(25);
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "Error Thread.", "Cliente", JOptionPane.ERROR_MESSAGE);
 					}
@@ -103,5 +91,11 @@ public class GameFrame extends JFrame {
 			}
 		};
 		t.start();
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+		String nickname = JOptionPane.showInputDialog(null, "Ingrese su nickname:", user.getNickname());
+		this.user.setNickname(nickname);
 	}
 }

@@ -8,10 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import client.conn.CommManager;
 import client.conn.Connection;
 import client.logic.Validator;
-import game.gui.GameFrame;
 
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -21,13 +19,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
 import javax.swing.JPasswordField;
-import java.awt.Color;
-import java.awt.Font;
 
 @SuppressWarnings("serial")
-public class NewUserDialog extends JDialog {
+public class LogUpDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldUser;
@@ -38,14 +33,14 @@ public class NewUserDialog extends JDialog {
 		int opc = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir?", "Cerrar",
 				JOptionPane.OK_CANCEL_OPTION);
 		if (opc == JOptionPane.OK_OPTION) {
-			NewUserDialog.this.dispose();
+			LogUpDialog.this.dispose();
 		}
 	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public NewUserDialog() {
+	public LogUpDialog() {
 		setBounds(100, 100, 450, 300);
 		this.setTitle("Pacman - Solicitud de Registro");
 		this.setModal(true);
@@ -54,7 +49,6 @@ public class NewUserDialog extends JDialog {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				cerrarVentana();
-
 			}
 		});
 
@@ -105,17 +99,15 @@ public class NewUserDialog extends JDialog {
 		btnEnviar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//				int f = 1;
 				String user = textFieldUser.getText();
 				char[] pass = textFieldPassword.getPassword();
 				char[] passConfirm = textFieldConfirm.getPassword();
-				//				String msg = "";
 				try {
 					Validator.isUserValid(user, pass, passConfirm);
 
-					CommManager.logUp(NewUserDialog.this, user, String.valueOf(pass));
+					Connection.getInstance().send("LOGUP " + user + " " + String.valueOf(pass));
 					
-					JOptionPane.showMessageDialog(null, "Cuenta creada con exito", "Nuevo usuario", JOptionPane.PLAIN_MESSAGE);
+					LogUpDialog.this.dispose();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
