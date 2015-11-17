@@ -12,6 +12,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import client.gui.game.map.*;
+import client.gui.game.other.TimerPanel;
 import client.logic.User;
 
 import java.awt.event.KeyAdapter;
@@ -22,11 +23,15 @@ public class GameFrame extends JFrame {
 
 	private static GameFrame INSTANCE;
 	
-	private User user;
+	protected User user;
 	
-	private JPanel contentPane;
-	MapPanel mapa;
-	int charDir = -1;
+	protected JPanel contentPane;
+	
+	protected MapPanel mapa;
+	protected TimerPanel timer;
+	
+	protected int time;
+	protected boolean started;
 
 	public static GameFrame getInstance(){
 		if(INSTANCE == null)
@@ -59,7 +64,7 @@ public class GameFrame extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent k) {
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
-					mapa.rotateCharacter(k.getKeyCode() - KeyEvent.VK_LEFT);
+					mapa.moveCharacter(k.getKeyCode() - KeyEvent.VK_LEFT);
 				}				
 			}
 		});
@@ -67,8 +72,12 @@ public class GameFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 		
+		timer = new TimerPanel();
+		timer.setLocation(10, 10);
+		contentPane.add(timer);
+
+		started = true;
 	}
 	
 	public void setMap(int[][] map){
@@ -80,8 +89,11 @@ public class GameFrame extends JFrame {
 			@Override
 			public void run() {
 				while (true) {
-					repaint();
-					mapa.update();
+					if(started){
+						timer.update(++time);
+						repaint();
+						mapa.update();
+					}
 					try {
 						Thread.sleep(25);
 					} catch (Exception e) {
@@ -97,5 +109,10 @@ public class GameFrame extends JFrame {
 		this.user = user;
 		String nickname = JOptionPane.showInputDialog(null, "Ingrese su nickname:", user.getNickname());
 		this.user.setNickname(nickname);
+	}
+	
+	public void initMatch(){
+		time = 0;
+		
 	}
 }

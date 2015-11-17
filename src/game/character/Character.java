@@ -36,72 +36,85 @@ public class Character extends Drawable {
 	}
 	
 	public void checkPos(int path) {
-		if (this.posX + this.width >= 0 && this.posX <= 500) {
-			if (this.posX % 50 <= 5 && desX < 0 && path != 2 && path != 3 && path != 5 && path != 8) {
-				// Si va a la izq y esta a la altura de una posible pared	
-				this.desX = 0;
-				this.posX = this.posX + 5 - this.posX % 50;
-				this.moving = false;
-				return;
-			}
-			if ((this.posX + this.width) % 50 >= 45 && desX > 0 && path != 1 && path != 5 && path != 6 && path != 9) {
-				// Si va a la der y esta a la altura de una posible pared
-				this.desX = 0;
-				this.posX = this.posX - ((this.posX + this.width) % 50 - 45);
-				this.moving = false;
-				return;
-			}
-			if (this.posY % 50 <= 5 && desY < 0 && path != 2 && path != 4 && path != 6 && path != 7) {
-				// Si va hacia arriba y esta a la altura de una posible pared
-				this.desY = 0;
-				this.posY = this.posY + 5 - this.posY % 50;
-				this.moving = false;
-				return;
-			}
-			if ((this.posY + this.height) % 50 >= 45 && desY > 0 && path != 1 && path != 3 && path != 4 && path != 10) {
-				// Si va hacia abajo y esta a la altura de una posible pared
-				this.desY = 0;
-				this.posY = this.posY - ((this.posY + this.height) % 50 - 45);
-				this.moving = false;
-				return;
-			}
-			if (fixRoute())
-				return;
-
-			this.desX = 0;
-			this.desY = 0;
-			this.moving = false;
-		}
-		if (this.posX + this.width < 0)
+		if (this.posX + this.width < 0){
 			this.posX = 500;
-		else
+			return;
+		}
+		if (this.posX > 500){
 			this.posX = -this.width;
-	}
-
-	private boolean fixRoute() {
-		if (this.posX % 50 <= (50 / 2) && desX != 0) {
+			return;
+		}
+		
+		int x, y;
+		x = this.posX % 50; // posicion x dentro del cuadrado
+		y = this.posY % 50; // posicion y dentro del cuadrado
+		
+		if (desX < 0 && x < 5 && !canGoLeft(path)) {
+			// Si va a la izq y esta a la altura de una posible pared	
+			this.desX = 0;
+			this.posX = this.posX - x + 5;
+			return;
+		}
+		if (desX > 0 && x + this.width > 45 && !canGoRigth(path)) {
+			// Si va a la izq y esta a la altura de una posible pared	
+			this.desX = 0;
+			this.posX = this.posX - (x + this.width) + 45;
+			return;
+		}
+		if (desY < 0 && y < 5 && !canGoUp(path)) {
+			// Si va a la izq y esta a la altura de una posible pared	
+			this.desY = 0;
+			this.posY = this.posY - y + 5;
+			return;
+		}
+		if (desY > 0 && y + this.width > 45 && !canGoDown(path)) {
+			// Si va a la izq y esta a la altura de una posible pared	
+			this.desY = 0;
+			this.posY = this.posY - (y + this.height) + 45;
+			return;
+		}
+		
+		if (desY != 0 && x <= (this.width / 2)) {
 			this.posX = (this.posX / 50) * 50 + (50 - this.width) / 2;
-			return true;
+			return;
 		}
-		if (this.posY % 50 <= (50 / 2) && desY != 0) {
+		if (desX != 0 && y <= (this.height / 2)) {
 			this.posY = (this.posY / 50) * 50 + (50 - this.height) / 2;
-			return true;
+			return;
 		}
-		return false;
+		
+		this.desX = 0;
+		this.desY = 0;
+		
 	}
 	
-	public boolean canTurn(int dir, int path) {
-		if (this.posX % 50 > (50 / 2) && this.posY % 50 < 11 && 
-				((dir == 1 && (path == 1 || path == 3 || path == 4 || path == 10)))	|| 
-				(dir == 3 && (path == 1 || path == 5 || path == 6 || path == 9)))
-			return false;
-
-		if (this.posY % 50 > (50 / 2) && this.posX % 50 < 11 && 
-				((dir == 0 && (path == 2 || path == 3 || path == 5 || path == 8) ))	|| 
-				(dir == 2 && (path == 2 || path == 4 || path == 6 || path == 7)))
-			return false;
-		return true;
+	private boolean canGoLeft(int path){
+		return !(path == 2 || path == 3 || path == 5 || path == 8);
 	}
+	
+	private boolean canGoRigth(int path){
+		return !(path == 2 || path == 4 || path == 6 || path == 7);
+	}
+	
+	private boolean canGoUp(int path){
+		return !(path == 1 || path == 3 || path == 4 || path == 10);
+	}
+	
+	private boolean canGoDown(int path){
+		return !(path == 1 || path == 5 || path == 6 || path == 9);
+	}
+	
+//	public boolean canTurn(int dir, int path) {
+//		if (this.posX % 50 > (50 / 2) && this.posY % 50 < 11 && 
+//				(dir == 1 && canGoUp(path)) || (dir == 3 && canGoDown(path)))
+//			return true;
+//
+//		if (this.posY % 50 > (50 / 2) && this.posX % 50 < 11 &&
+//				(dir == 0 && canGoLeft(path)) || (dir == 2 && canGoRigth(path)))
+//			return true;
+//		
+//		return false;
+//	}
 
 	public void respawn() {
 		this.posX = 50;

@@ -2,7 +2,7 @@ package client.logic;
 
 import client.logic.builder.UserBuilder;
 
-public class LineParser {
+public class Parser {
 	
 	public static int[][] parseMap(String input){
 		String[] lines = input.split("ELN");
@@ -33,6 +33,13 @@ public class LineParser {
 	public static User parseUser(String input){
 		String[] data = input.split(" ");
 		return new UserBuilder(Integer.parseInt(data[1])).withNickname(data[2]).withProfile(data[0]).build();
+	}
+
+	public static String parseTime(int time) {		
+		int realtime = 2400 - time; // 2400 es la cantidad de repaints que entran en un minuto
+		realtime = Math.floorDiv(realtime, 40); // 40 es la cantidad de repaints que entran en un segundo
+		String parsedtime = (realtime>=60)?"01:00":"00:"+((realtime<10)?"0"+realtime:realtime);
+		return parsedtime;
 	}
 	
 }

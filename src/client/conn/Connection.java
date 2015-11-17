@@ -24,17 +24,18 @@ public class Connection {
 		try {
 			ip = InetAddress.getByName(Config.get("ip"));
 		} catch (UnknownHostException e1) {
-			
-			
 			JOptionPane.showMessageDialog(null, 
 					"No se puede obtener la direccion de IP.", 
 					"Error de conexion", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
 		
 		int port = Integer.parseInt(Config.get("port"));
 
 		try{
+			System.out.println("1");
 			socket = new Socket(ip, port);
+			System.out.println("1");
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			System.out.println("Cargado " + ip + ":" + port);
@@ -42,6 +43,7 @@ public class Connection {
 			JOptionPane.showMessageDialog(null, 
 					"No se puede establecer la conexion con " + ip + ":" + port, 
 					"Error de conexion", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
 		
 	}

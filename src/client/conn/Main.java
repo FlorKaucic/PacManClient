@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Config.load();
-
+		
 		Thread t = new ServerListener();
 		t.start();
 

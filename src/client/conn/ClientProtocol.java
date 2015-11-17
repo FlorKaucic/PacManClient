@@ -6,7 +6,7 @@ import client.gui.LogInFrame;
 import client.gui.LogUpDialog;
 import client.gui.StatsFrame;
 import client.gui.game.GameFrame;
-import client.logic.LineParser;
+import client.logic.Parser;
 
 public class ClientProtocol {
 	
@@ -33,7 +33,7 @@ public class ClientProtocol {
 	private static void processLogin(String input){
 		if (input.startsWith("OK")) {
 			GameFrame frame = GameFrame.getInstance();
-			frame.setUser(LineParser.parseUser(input.substring(3)));
+			frame.setUser(Parser.parseUser(input.substring(3)));
 			Connection.getInstance().send("GETMAP");
 			return;
 		}
@@ -59,7 +59,7 @@ public class ClientProtocol {
 		if (input.startsWith("OK")) {
 			input = input.substring(3);
 			GameFrame frame = GameFrame.getInstance();
-			frame.setMap(LineParser.parseMap(input));
+			frame.setMap(Parser.parseMap(input));
 			frame.setVisible(true);
 			return;
 		}
@@ -68,7 +68,7 @@ public class ClientProtocol {
 	
 	public static void processStats(String input){
 		if (input.startsWith("OK")) {
-			Object[][] data = LineParser.parseStats(input.substring(3));
+			Object[][] data = Parser.parseStats(input.substring(3));
 			StatsFrame frame = new StatsFrame();
 			frame.load(data);
 			frame.setVisible(true);

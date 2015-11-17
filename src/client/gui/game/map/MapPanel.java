@@ -4,14 +4,12 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import client.config.Config;
+import client.conn.Connection;
 import game.character.Character;
-import game.character.Pacman;
 
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel {
@@ -19,7 +17,7 @@ public class MapPanel extends JPanel {
 	private int height = 0;
 	public static BufferedImage MAP_IMAGE = null;
 	private int[][] map;
-	ArrayList<Character> characters;
+	Character[] characters;
 	boolean start = false;
 	int me;
 
@@ -58,45 +56,56 @@ public class MapPanel extends JPanel {
 					if (bolita == 2)
 						this.add(new Dibujable(j * 50 + 15, i * 50 + 15, 15, 15));
 				}
+		this.characters = null;
 
-		System.out.println("Here");
-		characters = new ArrayList<Character>();
-		characters.add(new Pacman(235, 410, 30, 30, 2, "res/img/pacman.png", 4, 20));
-
-		System.out.println("pacman");
-		for (Character c : characters)
-			add(c);
-
-		System.out.println("done");
+		//		characters = new ArrayList<Character>();
+		//		characters.add(new Pacman(235, 410, 30, 30, 2, "res/img/pacman.png", 4, 20));
+		//		for (Character c : characters)
+		//			add(c);
 
 	}
 
+	public void addCharacters(Character[] characters) {
+		this.characters = characters;
+		for (Character c : this.characters)
+			add(c);
+	}
+
 	public void update() {
-		for (Character c : characters){
-			c.update();
-			c.incLife();
-			int path = map[c.getPosY() / 50][c.getPosX() / 50] / 8;
-			c.checkPos(path);
-		}
+		if (characters != null)
+			for (Character c : characters) {
+				c.update();
+				c.incLife();
+				int i = c.getPosY() / 50;
+				i = (i >= map.length) ? map.length - 1 : ((i <= 0) ? 0 : i);
+				int j = c.getPosX() / 50;
+				j = (j >= map[0].length) ? map[0].length - 1 : ((j <= 0) ? 0 : j);
+				int path = map[i][j] / 8;
+				c.checkPos(path);
+			}
 	}
 
 	public void setMe(int me) {
 		this.me = me;
 	}
 
-	public void rotateCharacter(int dir) {
-		Character mypj = characters.get(me);
-		if (mypj.canTurn(dir, map[mypj.getPosY() / 50][mypj.getPosX() / 50] / 8)) {
-			if (dir == 0 || dir == 2) {
-				mypj.setDesX(dir - 1);
-				mypj.setDesY(0);
-			}
-			if (dir == 1 || dir == 3) {
-				mypj.setDesY(dir - 2);
-				mypj.setDesX(0);
-			}
-			mypj.setImgY(dir);
-		}
+	public void moveCharacter(int dir) {
+		Connection.getInstance().send("MOVE " + me + " " + dir);
 	}
+
+	//	public void rotateCharacter(int dir) {
+	//		Character mypj = characters.get(me);
+	//		if (mypj.canTurn(dir, map[mypj.getPosY() / 50][mypj.getPosX() / 50] / 8)) {
+	//			if (dir == 0 || dir == 2) {
+	//				mypj.setDesX(dir - 1);
+	//				mypj.setDesY(0);
+	//			}
+	//			if (dir == 1 || dir == 3) {
+	//				mypj.setDesY(dir - 2);
+	//				mypj.setDesX(0);
+	//			}
+	//			mypj.setImgY(dir);
+	//		}
+	//	}
 
 }
