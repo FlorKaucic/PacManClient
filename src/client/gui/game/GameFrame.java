@@ -12,6 +12,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import client.gui.game.map.*;
+import client.gui.game.other.ScorePanel;
 import client.gui.game.other.TimerPanel;
 import client.logic.User;
 
@@ -32,7 +33,14 @@ public class GameFrame extends JFrame {
 	
 	protected int time;
 	protected boolean started;
-
+	
+	protected ScorePanel scorer1;
+	protected ScorePanel scorer2;
+	protected ScorePanel scorer3;
+	protected ScorePanel scorer4;
+	
+	private int cantPlayers;
+	
 	public static GameFrame getInstance(){
 		if(INSTANCE == null)
 			INSTANCE = new GameFrame();
@@ -76,6 +84,12 @@ public class GameFrame extends JFrame {
 		timer = new TimerPanel();
 		timer.setLocation(this.getWidth()/2-timer.getWidth()/2,50);
 		contentPane.add(timer);
+		
+		cantPlayers = 1;
+		scorer1 = new ScorePanel();
+		scorer1.setLocation(this.getWidth()/(2*cantPlayers)-scorer1.getWidth()/2,0);
+		contentPane.add(scorer1);
+		
 
 		started = true;
 	}
