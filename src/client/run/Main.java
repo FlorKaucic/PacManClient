@@ -1,6 +1,7 @@
-package client.conn;
+package client.run;
 
 import client.config.Config;
+import client.conn.ServerListener;
 import client.gui.LogInFrame;
 
 public class Main {
