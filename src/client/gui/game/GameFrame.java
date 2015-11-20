@@ -74,7 +74,7 @@ public class GameFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		timer = new TimerPanel();
-		timer.setLocation(10, 10);
+		timer.setLocation(this.getWidth()/2-timer.getWidth()/2,50);
 		contentPane.add(timer);
 
 		started = true;
@@ -82,7 +82,7 @@ public class GameFrame extends JFrame {
 	
 	public void setMap(int[][] map){
 		mapa = new MapPanel(map);
-		mapa.setLocation(150, 50);
+		mapa.setLocation(150, 100);
 		contentPane.add(mapa);
 
 		Thread t = new Thread() {

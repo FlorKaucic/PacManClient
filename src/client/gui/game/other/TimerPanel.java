@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import client.logic.Parser;
 
@@ -14,13 +15,14 @@ public class TimerPanel extends JPanel {
 	
 	public TimerPanel() {
 		setLayout(null);
-		setSize(100, 100);
+		setSize(75, 50);
 		setBackground(Color.BLACK);
 		lblTime = new JLabel();
+		lblTime.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTime.setText("--:--");
 		lblTime.setForeground(Color.WHITE);
-		lblTime.setFont(new Font("Monospaced", Font.PLAIN, 14));
-		lblTime.setBounds(0, 0, 100, 100);
+		lblTime.setFont(new Font("Baby Kruffy", Font.PLAIN, 24));
+		lblTime.setBounds(0, 0, 75, 50);
 		add(lblTime);
 	}
 
