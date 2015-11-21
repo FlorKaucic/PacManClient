@@ -42,6 +42,7 @@ public class GameFrame extends JFrame {
 	protected ScorePanel scorer2;
 	protected ScorePanel scorer3;
 	protected ScorePanel scorer4;
+	protected ScorePanel scorer5;
 
 	private int cantPlayers;
 
@@ -92,11 +93,35 @@ public class GameFrame extends JFrame {
 		timer.setLocation(this.getWidth() / 2 - timer.getWidth() / 2, 50);
 		contentPane.add(timer);
 
-		//ACLARACION: EN ESTE PUNTO TODAVIA NO VAS A SABER LA CANTIDAD DE JUGADORES
-		//		cantPlayers = 1;
-		//		scorer1 = new ScorePanel();
-		//		scorer1.setLocation(this.getWidth() / (2 * cantPlayers) - scorer1.getWidth() / 2, 0);
-		//		contentPane.add(scorer1);
+		
+		//MODIFICAR ESTO
+		cantPlayers = 4;
+		
+		if(cantPlayers>=1){
+			scorer1 = new ScorePanel();
+			scorer1.setLocation(1*(this.getWidth()/(cantPlayers+1))-scorer1.getWidth()/2,0);
+			contentPane.add(scorer1);
+		}
+		if(cantPlayers>=2){
+			scorer2 = new ScorePanel();
+			scorer2.setLocation(2*(this.getWidth()/(cantPlayers+1))-scorer2.getWidth()/2,0);
+			contentPane.add(scorer2);
+		}
+		if(cantPlayers>=3){
+			scorer3 = new ScorePanel();
+			scorer3.setLocation(3*this.getWidth()/(cantPlayers+1)-scorer3.getWidth()/2,0);
+			contentPane.add(scorer3);
+		}
+		if(cantPlayers>=4){
+			scorer4 = new ScorePanel();
+			scorer4.setLocation(4*this.getWidth()/(cantPlayers+1)-scorer4.getWidth()/2,0);
+			contentPane.add(scorer4);
+		}
+		if(cantPlayers==5){
+			scorer5 = new ScorePanel();
+			scorer5.setLocation(5*this.getWidth()/(cantPlayers+1)-scorer5.getWidth()/2,0);
+			contentPane.add(scorer5);
+		}
 
 	}
 
@@ -134,7 +159,7 @@ public class GameFrame extends JFrame {
 					mapa.update();
 
 					try {
-						Thread.sleep(25);
+						Thread.sleep(50);
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "Error Thread.", "Cliente", JOptionPane.ERROR_MESSAGE);
 					}
