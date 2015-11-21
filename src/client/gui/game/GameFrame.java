@@ -83,7 +83,8 @@ public class GameFrame extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent k) {
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
-					mapa.moveCharacter(k.getKeyCode() - KeyEvent.VK_LEFT);
+					Connection.getInstance().send("MOVE "+(k.getKeyCode() - KeyEvent.VK_LEFT));
+//					mapa.setDir(k.getKeyCode() - KeyEvent.VK_LEFT);
 				}
 			}
 		});
@@ -140,7 +141,9 @@ public class GameFrame extends JFrame {
 		mapa.addCharacters(characters);
 		System.out.println("after added");
 
-		
+
+		mapa.addCharacters(characters);
+	
 		setScorers(characters.length);
 		
 		Thread t = new Thread() {
@@ -161,6 +164,7 @@ public class GameFrame extends JFrame {
 		};
 		t.start();
 	}
+
 
 //	public void initCountdown() {
 //		time = 10;
@@ -213,6 +217,8 @@ public class GameFrame extends JFrame {
 
 	}
 
+	
+
 	public void showWaiting() {
 		waiting = new WaitingDialog(this.user.getProfile());
 		waiting.setVisible(true);
@@ -244,5 +250,9 @@ public class GameFrame extends JFrame {
 	//		};
 	//		t.start();
 	//	}
+
+	public void setMovement(int i, int x, int y, int dx, int dy) {
+		mapa.setMovement(i, x, y, dx, dy);
+	}
 
 }
