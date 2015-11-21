@@ -10,10 +10,12 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import client.config.Config;
+import client.conn.Connection;
 import client.gui.game.map.*;
 import client.gui.game.other.ScorePanel;
 import client.gui.game.other.TimerPanel;
 import client.gui.game.other.WaitingDialog;
+import client.gui.notifications.Alert;
 import client.logic.User;
 
 import game.character.Character;
@@ -21,6 +23,8 @@ import game.character.Character;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
@@ -99,9 +103,7 @@ public class GameFrame extends JFrame {
 		mapa = new MapPanel(map);
 		mapa.setLocation(150, 100);
 		contentPane.add(mapa);
-
-		waiting = new WaitingDialog(this.user.getProfile());
-		waiting.setVisible(true);
+		Connection.getInstance().send("READY");
 	}
 
 	public void setUser(User user) {
@@ -115,6 +117,21 @@ public class GameFrame extends JFrame {
 	}
 
 	public void initMatch(Character[] characters) {
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (GameFrame.this.user.getProfile() != -1) {
+					Alert dialog = new Alert("Usa las flechas para moverte.");
+					dialog.setBorderColor(Color.YELLOW);
+					dialog.setVisible(true);
+				} else {
+					Alert dialog = new Alert("Solo podes ver la partida.");
+					dialog.setBorderColor(Color.YELLOW);
+					dialog.setVisible(true);
+				}
+			}
+		});
+
 		waiting.dispose();
 		time = 0;
 		playing = true;
@@ -122,9 +139,13 @@ public class GameFrame extends JFrame {
 		System.out.println("before added");
 		mapa.addCharacters(characters);
 		System.out.println("after added");
+<<<<<<< HEAD
 		
 		setScorers(characters.length);
 		
+=======
+
+>>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 		Thread t = new Thread() {
 			@Override
 			public void run() {
@@ -144,6 +165,7 @@ public class GameFrame extends JFrame {
 		t.start();
 	}
 
+<<<<<<< HEAD
 //	public void initCountdown() {
 //		time = 10;
 //		Thread t = new Thread() {
@@ -194,4 +216,37 @@ public class GameFrame extends JFrame {
 		}
 
 	}
+=======
+	public void showWaiting() {
+		waiting = new WaitingDialog(this.user.getProfile());
+		waiting.setVisible(true);
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				waiting.requestFocus();
+			}
+		});
+	}
+
+	//	public void initCountdown() {
+	//		time = 10;
+	//		Thread t = new Thread() {
+	//			@Override
+	//			public void run() {
+	//				while (true) {
+	//					waiting.update("La partida comienza en " + time + " segundos.");
+	//					time--;
+	//					if (time < 0)
+	//						break;
+	//					try {
+	//						Thread.sleep(1000);
+	//					} catch (Exception e) {
+	//						JOptionPane.showMessageDialog(null, "Error Thread.", "Cliente", JOptionPane.ERROR_MESSAGE);
+	//					}
+	//				}
+	//			}
+	//		};
+	//		t.start();
+	//	}
+>>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 }

@@ -35,6 +35,12 @@ public class ClientProtocol {
 			System.out.println("STATS");
 			input = input.substring(5);
 		}
+		if (input.startsWith("READYOK")){
+			System.out.println("READYOK");
+			processReady();
+		}
+		if (input.startsWith("PING"))
+			Connection.getInstance().send("PONG");
 	}
 	
 //	private static void processCountdown() {
@@ -42,11 +48,14 @@ public class ClientProtocol {
 //		frame.initCountdown();
 //	}
 
+	private static void processReady() {
+		GameFrame frame = GameFrame.getInstance();
+		frame.showWaiting();
+	}
+
 	private static void processStart(String input) {
 		GameFrame frame = GameFrame.getInstance();
-		System.out.println("before parse");
 		frame.initMatch(Parser.parseCharacters(input));
-		System.out.println("after parse");
 	}
 
 	private static void processLogin(String input){

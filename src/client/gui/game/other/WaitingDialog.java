@@ -34,7 +34,7 @@ public class WaitingDialog extends JDialog {
 		int x = Integer.parseInt(Config.get("screen_width"))/2-200;
 		int y = (Integer.parseInt(Config.get("screen_height"))-Integer.parseInt(Config.get("taskbar_height")))/2-200;
 		setBounds(x, y, 400, 400);
-		this.setModal(true);
+//		this.setModal(true);
 		this.setUndecorated(true);
 		
 		getRootPane().setLayout(null);
