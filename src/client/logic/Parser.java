@@ -58,7 +58,6 @@ public class Parser {
 		Character[] characters = new Character[lines.length];
 		for (int i = 0; i < lines.length; i++) {
 			c = lines[i].split(" ");
-			System.out.println("adding char");
 			if(i == 0)
 				characters[i] = new Pacman(Integer.parseInt(c[0]),Integer.parseInt(c[1]),
 						Integer.parseInt(c[2]),Integer.parseInt(c[3]),
@@ -70,8 +69,6 @@ public class Parser {
 						Integer.parseInt(c[4]),Config.get("img_path")+Parser.parseProfile(i).toLowerCase()+".png",
 						Integer.parseInt(c[5]),Integer.parseInt(c[6]));
 		}
-
-		System.out.println("before return");
 		return characters;
 	}
 	
