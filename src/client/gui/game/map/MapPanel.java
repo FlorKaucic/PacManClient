@@ -20,6 +20,7 @@ public class MapPanel extends JPanel {
 	Character[] characters;
 	boolean start = false;
 	int me;
+	int dir;
 
 	@Override
 	public void paint(Graphics g) {
@@ -75,13 +76,13 @@ public class MapPanel extends JPanel {
 		if (characters != null)
 			for (Character c : characters) {
 				c.update();
+				//				int i = c.getPosY() / 50;
+				//				i = (i >= map.length) ? map.length - 1 : ((i <= 0) ? 0 : i);
+				//				int j = c.getPosX() / 50;
+				//				j = (j >= map[0].length) ? map[0].length - 1 : ((j <= 0) ? 0 : j);
+				//				int path = map[i][j] / 8;
+				//				c.update(path,dir);
 				c.incLife();
-//				int i = c.getPosY() / 50;
-//				i = (i >= map.length) ? map.length - 1 : ((i <= 0) ? 0 : i);
-//				int j = c.getPosX() / 50;
-//				j = (j >= map[0].length) ? map[0].length - 1 : ((j <= 0) ? 0 : j);
-//				int path = map[i][j] / 8;
-//				c.checkPos(path);
 			}
 	}
 
@@ -98,6 +99,16 @@ public class MapPanel extends JPanel {
 		this.characters[i].setPosY(y);
 		this.characters[i].setDesX(dx);
 		this.characters[i].setDesY(dy);
+		if (dx != 0 || dy != 0) {
+			this.characters[i].setImgY();
+			this.characters[i].setMoving(true);
+		} else
+			this.characters[i].setMoving(false);
+	}
+
+	public void setDir(int i) {
+		// TODO Auto-generated method stub
+		this.dir = i;
 	}
 
 	//	public void rotateCharacter(int dir) {

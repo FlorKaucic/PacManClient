@@ -55,7 +55,7 @@ public class ClientProtocol {
 		String[] num = input.split(" ");
 		GameFrame frame = GameFrame.getInstance();
 		frame.setMovement(Integer.parseInt(num[0]),
-				Integer.parseInt(num[2]),Integer.parseInt(num[2]),
+				Integer.parseInt(num[1]),Integer.parseInt(num[2]),
 				Integer.parseInt(num[3]),Integer.parseInt(num[4]));	
 	}
 

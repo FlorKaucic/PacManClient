@@ -84,6 +84,7 @@ public class GameFrame extends JFrame {
 			public void keyPressed(KeyEvent k) {
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
 					Connection.getInstance().send("MOVE "+(k.getKeyCode() - KeyEvent.VK_LEFT));
+//					mapa.setDir(k.getKeyCode() - KeyEvent.VK_LEFT);
 				}
 			}
 		});
@@ -136,16 +137,10 @@ public class GameFrame extends JFrame {
 		time = 0;
 		playing = true;
 
-		System.out.println("before added");
 		mapa.addCharacters(characters);
-		System.out.println("after added");
-<<<<<<< HEAD
 		
 		setScorers(characters.length);
 		
-=======
-
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 		Thread t = new Thread() {
 			@Override
 			public void run() {
@@ -164,8 +159,8 @@ public class GameFrame extends JFrame {
 		};
 		t.start();
 	}
+	
 
-<<<<<<< HEAD
 //	public void initCountdown() {
 //		time = 10;
 //		Thread t = new Thread() {
@@ -216,7 +211,6 @@ public class GameFrame extends JFrame {
 		}
 
 	}
-=======
 	public void showWaiting() {
 		waiting = new WaitingDialog(this.user.getProfile());
 		waiting.setVisible(true);
@@ -232,25 +226,4 @@ public class GameFrame extends JFrame {
 		mapa.setMovement(i, x, y, dx, dy);
 	}
 
-	//	public void initCountdown() {
-	//		time = 10;
-	//		Thread t = new Thread() {
-	//			@Override
-	//			public void run() {
-	//				while (true) {
-	//					waiting.update("La partida comienza en " + time + " segundos.");
-	//					time--;
-	//					if (time < 0)
-	//						break;
-	//					try {
-	//						Thread.sleep(1000);
-	//					} catch (Exception e) {
-	//						JOptionPane.showMessageDialog(null, "Error Thread.", "Cliente", JOptionPane.ERROR_MESSAGE);
-	//					}
-	//				}
-	//			}
-	//		};
-	//		t.start();
-	//	}
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 }
