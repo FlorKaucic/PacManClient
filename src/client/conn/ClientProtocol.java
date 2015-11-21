@@ -11,6 +11,7 @@ import client.logic.Parser;
 public class ClientProtocol {
 	
 	public static void processInput(String input) {
+		System.out.println(input);
 		if (input.startsWith("LOGIN")) {
 			System.out.println("LOGIN");
 			processLogin(input.substring(5));
@@ -23,13 +24,29 @@ public class ClientProtocol {
 			System.out.println("MAP");
 			processMap(input.substring(3));
 		}
+//		if (input.startsWith("COUNTDOWN")){
+//			System.out.println("COUNTDOWN");
+//			processCountdown();
+//		}
+		if (input.startsWith("START")) {
+			processStart(input.substring(6));
+		}
 		if (input.startsWith("STATS")) {
 			System.out.println("STATS");
 			input = input.substring(5);
-			
 		}
 	}
 	
+//	private static void processCountdown() {
+//		GameFrame frame = GameFrame.getInstance();
+//		frame.initCountdown();
+//	}
+
+	private static void processStart(String input) {
+		GameFrame frame = GameFrame.getInstance();
+		frame.initMatch(Parser.parseCharacters(input));
+	}
+
 	private static void processLogin(String input){
 		if (input.startsWith("OK")) {
 			GameFrame frame = GameFrame.getInstance();
@@ -59,11 +76,9 @@ public class ClientProtocol {
 		if (input.startsWith("OK")) {
 			input = input.substring(3);
 			GameFrame frame = GameFrame.getInstance();
-			frame.setMap(Parser.parseMap(input));
 			frame.setVisible(true);
-			return;
+			frame.setMap(Parser.parseMap(input));
 		}
-		// ERROR?
 	}
 	
 	public static void processStats(String input){

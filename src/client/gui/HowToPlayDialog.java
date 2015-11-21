@@ -1,12 +1,12 @@
 package client.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+
+import client.config.Config;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,11 +26,12 @@ public class HowToPlayDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public HowToPlayDialog() {
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(dim.width / 2 - 335, dim.height / 2 - 225, 670, 450);
+		int x = Integer.parseInt(Config.get("screen_width")) / 2 - 335;
+		int y = Integer.parseInt(Config.get("screen_height")) / 2 - 225;
+		setBounds(x, y, 670, 450);
 		this.setModal(true);
 		this.setTitle("Instrucciones");
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

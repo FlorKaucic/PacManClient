@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 
 import client.logic.Parser;
 
+@SuppressWarnings("serial")
 public class ScorePanel extends JPanel{
 
 protected JLabel lblScore;

@@ -1,6 +1,10 @@
 package client.logic;
 
+import client.config.Config;
 import client.logic.builder.UserBuilder;
+import game.character.Character;
+import game.character.Ghost;
+import game.character.Pacman;
 
 public class Parser {
 	
@@ -32,7 +36,7 @@ public class Parser {
 	
 	public static User parseUser(String input){
 		String[] data = input.split(" ");
-		return new UserBuilder(Integer.parseInt(data[1])).withNickname(data[2]).withProfile(data[0]).build();
+		return new UserBuilder(Integer.parseInt(data[1])).withNickname(data[2]).withProfile(Integer.parseInt(data[0])).build();
 	}
 
 	public static String parseTime(int time) {		
@@ -40,6 +44,32 @@ public class Parser {
 		realtime = Math.floorDiv(realtime, 40); // 40 es la cantidad de repaints que entran en un segundo
 		String parsedtime = (realtime>=60)?"01:00":"00:"+((realtime<10)?"0"+realtime:realtime);
 		return parsedtime;
+	}
+
+	public static String parseProfile(int profile) {
+		if(profile>=0&&profile<=4)
+			return Config.get("name"+profile);
+		return "ESPECTADOR";
+	}
+
+	public static Character[] parseCharacters(String input) {
+		String[] lines = input.split("ELN");
+		String[] c = null;
+		Character[] characters = new Character[lines.length];
+		for (int i = 0; i < lines.length; i++) {
+			c = lines[i].split(" ");
+			if(i == 0)
+				characters[i] = new Pacman(Integer.parseInt(c[0]),Integer.parseInt(c[1]),
+						Integer.parseInt(c[2]),Integer.parseInt(c[3]),
+						Integer.parseInt(c[4]),Config.get("img_path")+Parser.parseProfile(i).toLowerCase()+".png",
+						Integer.parseInt(c[5]),Integer.parseInt(c[6]));
+			else
+				characters[i] = new Ghost(Integer.parseInt(c[0]),Integer.parseInt(c[1]),
+						Integer.parseInt(c[2]),Integer.parseInt(c[3]),
+						Integer.parseInt(c[4]),Config.get("img_path")+Parser.parseProfile(i).toLowerCase()+".png",
+						Integer.parseInt(c[5]),Integer.parseInt(c[6]));
+		}
+		return characters;
 	}
 	
 }

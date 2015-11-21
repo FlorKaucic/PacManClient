@@ -5,7 +5,7 @@ import client.logic.builder.UserBuilder;
 public class User {
 	private int id;
 	private String nickname;
-	private String profile;	
+	private int profile;	
 	
 	public User(UserBuilder builder){
 		this.id = builder.getId();
@@ -25,7 +25,7 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	public String getProfile() {
+	public int getProfile() {
 		return profile;
 	}
 

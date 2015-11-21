@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import client.config.Config;
+
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 
@@ -20,7 +22,9 @@ public class StatsFrame extends JFrame {
 	public StatsFrame() {
 		setTitle("PacMan - Estadisticas");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		int x = Integer.parseInt(Config.get("screen_width"))/2-225;
+		int y = Integer.parseInt(Config.get("screen_height"))/2-150;
+		setBounds(x, y, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

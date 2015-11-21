@@ -1,11 +1,11 @@
 package client.gui;
 
-import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.config.Config;
 import client.conn.Connection;
 
 import javax.swing.JLabel;
@@ -19,12 +19,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Font;
-import java.awt.Toolkit;
 import javax.swing.JPasswordField;
 
 @SuppressWarnings("serial")
 public class LogInFrame extends JFrame {
-	
+
 	private JPanel contentPane;
 	private JTextField textFieldUser;
 	private JPasswordField textFieldPassword;
@@ -35,12 +34,12 @@ public class LogInFrame extends JFrame {
 		if (opc == JOptionPane.OK_OPTION) {
 			System.exit(0);
 		}
-	}	
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public LogInFrame() { 
+	public LogInFrame() {
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -49,8 +48,9 @@ public class LogInFrame extends JFrame {
 			}
 		});
 		setTitle("Pacman");
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(dim.width / 2 - 200, dim.height / 2 - 225, 400, 450);
+		int x = Integer.parseInt(Config.get("screen_width")) / 2 - 200;
+		int y = Integer.parseInt(Config.get("screen_height")) / 2 - 225;
+		setBounds(x, y, 400, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,30 +73,29 @@ public class LogInFrame extends JFrame {
 		lblPassword.setBounds(61, 150, 80, 14);
 		contentPane.add(lblPassword);
 
-	
 		JButton btnLogIn = new JButton("Acceder");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String user = textFieldUser.getText(); 
-				char [] pass= textFieldPassword.getPassword();
-								
+				String user = textFieldUser.getText();
+				char[] pass = textFieldPassword.getPassword();
+
 				Connection.getInstance().send("LOGIN " + user + " " + String.valueOf(pass));
 				LogInFrame.this.dispose();
 			}
 		});
 		btnLogIn.setBounds(15, 190, 160, 40);
 		contentPane.add(btnLogIn);
-		
+
 		JButton btnAsViewer = new JButton("Solo ver");
 		btnAsViewer.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAsViewer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String user = textFieldUser.getText(); 
-				char [] pass= textFieldPassword.getPassword();
-								
+				String user = textFieldUser.getText();
+				char[] pass = textFieldPassword.getPassword();
+
 				Connection.getInstance().send("LOGIN VIEWER" + user + " " + String.valueOf(pass));
 				LogInFrame.this.dispose();
 			}
@@ -110,7 +109,7 @@ public class LogInFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				LogUpDialog reg = new LogUpDialog();
-				reg.setVisible(true);	
+				reg.setVisible(true);
 			}
 		});
 		btnRegister.setBounds(105, 280, 180, 40);
@@ -127,19 +126,19 @@ public class LogInFrame extends JFrame {
 		});
 		btnInstructions.setBounds(105, 350, 180, 40);
 		contentPane.add(btnInstructions);
-		
+
 		JLabel lblPacman = new JLabel("PACMAN - Multijugador");
 		lblPacman.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPacman.setBounds(90, 11, 214, 40);
 		contentPane.add(lblPacman);
-		
+
 		textFieldPassword = new JPasswordField();
 		textFieldPassword.setBounds(139, 149, 180, 20);
 		contentPane.add(textFieldPassword);
-		
+
 	}
-	
-	public void setUser(String user){
+
+	public void setUser(String user) {
 		this.textFieldUser.setText(user);
 	}
 }

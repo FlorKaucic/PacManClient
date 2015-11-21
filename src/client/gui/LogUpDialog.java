@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.config.Config;
 import client.conn.Connection;
 import client.logic.Validator;
 
@@ -41,7 +42,9 @@ public class LogUpDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public LogUpDialog() {
-		setBounds(100, 100, 450, 300);
+		int x = Integer.parseInt(Config.get("screen_width"))/2-225;
+		int y = Integer.parseInt(Config.get("screen_height"))/2-150;
+		setBounds(x, y, 450, 300);
 		this.setTitle("Pacman - Solicitud de Registro");
 		this.setModal(true);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
