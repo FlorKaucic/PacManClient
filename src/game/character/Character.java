@@ -35,74 +35,74 @@ public class Character extends Drawable {
 				null);
 	}
 	
-	public void checkPos(int path) {
-		if (this.posX + this.width < 0){
-			this.posX = 500;
-			return;
-		}
-		if (this.posX > 500){
-			this.posX = -this.width;
-			return;
-		}
-		
-		int x, y;
-		x = this.posX % 50; // posicion x dentro del cuadrado
-		y = this.posY % 50; // posicion y dentro del cuadrado
-		
-		if (desX < 0 && x < 5 && !canGoLeft(path)) {
-			// Si va a la izq y esta a la altura de una posible pared	
-			this.desX = 0;
-			this.posX = this.posX - x + 5;
-			return;
-		}
-		if (desX > 0 && x + this.width > 45 && !canGoRigth(path)) {
-			// Si va a la izq y esta a la altura de una posible pared	
-			this.desX = 0;
-			this.posX = this.posX - (x + this.width) + 45;
-			return;
-		}
-		if (desY < 0 && y < 5 && !canGoUp(path)) {
-			// Si va a la izq y esta a la altura de una posible pared	
-			this.desY = 0;
-			this.posY = this.posY - y + 5;
-			return;
-		}
-		if (desY > 0 && y + this.width > 45 && !canGoDown(path)) {
-			// Si va a la izq y esta a la altura de una posible pared	
-			this.desY = 0;
-			this.posY = this.posY - (y + this.height) + 45;
-			return;
-		}
-		
-		if (desY != 0 && x <= (this.width / 2)) {
-			this.posX = (this.posX / 50) * 50 + (50 - this.width) / 2;
-			return;
-		}
-		if (desX != 0 && y <= (this.height / 2)) {
-			this.posY = (this.posY / 50) * 50 + (50 - this.height) / 2;
-			return;
-		}
-		
-		this.desX = 0;
-		this.desY = 0;
-		
-	}
-	
-	private boolean canGoLeft(int path){
-		return !(path == 2 || path == 3 || path == 5 || path == 8);
-	}
-	
-	private boolean canGoRigth(int path){
-		return !(path == 2 || path == 4 || path == 6 || path == 7);
-	}
-	
-	private boolean canGoUp(int path){
-		return !(path == 1 || path == 3 || path == 4 || path == 10);
-	}
-	
-	private boolean canGoDown(int path){
-		return !(path == 1 || path == 5 || path == 6 || path == 9);
-	}
+//	public void checkPos(int path) {
+//		if (this.posX + this.width < 0){
+//			this.posX = 500;
+//			return;
+//		}
+//		if (this.posX > 500){
+//			this.posX = -this.width;
+//			return;
+//		}
+//		
+//		int x, y;
+//		x = this.posX % 50; // posicion x dentro del cuadrado
+//		y = this.posY % 50; // posicion y dentro del cuadrado
+//		
+//		if (desX < 0 && x < 5 && !canGoLeft(path)) {
+//			// Si va a la izq y esta a la altura de una posible pared	
+//			this.desX = 0;
+//			this.posX = this.posX - x + 5;
+//			return;
+//		}
+//		if (desX > 0 && x + this.width > 45 && !canGoRigth(path)) {
+//			// Si va a la izq y esta a la altura de una posible pared	
+//			this.desX = 0;
+//			this.posX = this.posX - (x + this.width) + 45;
+//			return;
+//		}
+//		if (desY < 0 && y < 5 && !canGoUp(path)) {
+//			// Si va a la izq y esta a la altura de una posible pared	
+//			this.desY = 0;
+//			this.posY = this.posY - y + 5;
+//			return;
+//		}
+//		if (desY > 0 && y + this.width > 45 && !canGoDown(path)) {
+//			// Si va a la izq y esta a la altura de una posible pared	
+//			this.desY = 0;
+//			this.posY = this.posY - (y + this.height) + 45;
+//			return;
+//		}
+//		
+//		if (desY != 0 && x <= (this.width / 2)) {
+//			this.posX = (this.posX / 50) * 50 + (50 - this.width) / 2;
+//			return;
+//		}
+//		if (desX != 0 && y <= (this.height / 2)) {
+//			this.posY = (this.posY / 50) * 50 + (50 - this.height) / 2;
+//			return;
+//		}
+//		
+//		this.desX = 0;
+//		this.desY = 0;
+//		
+//	}
+//	
+//	private boolean canGoLeft(int path){
+//		return !(path == 2 || path == 3 || path == 5 || path == 8);
+//	}
+//	
+//	private boolean canGoRigth(int path){
+//		return !(path == 2 || path == 4 || path == 6 || path == 7);
+//	}
+//	
+//	private boolean canGoUp(int path){
+//		return !(path == 1 || path == 3 || path == 4 || path == 10);
+//	}
+//	
+//	private boolean canGoDown(int path){
+//		return !(path == 1 || path == 5 || path == 6 || path == 9);
+//	}
 	
 //	public boolean canTurn(int dir, int path) {
 //		if (this.posX % 50 > (50 / 2) && this.posY % 50 < 11 && 

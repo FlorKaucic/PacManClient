@@ -76,12 +76,12 @@ public class MapPanel extends JPanel {
 			for (Character c : characters) {
 				c.update();
 				c.incLife();
-				int i = c.getPosY() / 50;
-				i = (i >= map.length) ? map.length - 1 : ((i <= 0) ? 0 : i);
-				int j = c.getPosX() / 50;
-				j = (j >= map[0].length) ? map[0].length - 1 : ((j <= 0) ? 0 : j);
-				int path = map[i][j] / 8;
-				c.checkPos(path);
+//				int i = c.getPosY() / 50;
+//				i = (i >= map.length) ? map.length - 1 : ((i <= 0) ? 0 : i);
+//				int j = c.getPosX() / 50;
+//				j = (j >= map[0].length) ? map[0].length - 1 : ((j <= 0) ? 0 : j);
+//				int path = map[i][j] / 8;
+//				c.checkPos(path);
 			}
 	}
 
@@ -91,6 +91,13 @@ public class MapPanel extends JPanel {
 
 	public void moveCharacter(int dir) {
 		Connection.getInstance().send("MOVE " + me + " " + dir);
+	}
+
+	public void setMovement(int i, int x, int y, int dx, int dy) {
+		this.characters[i].setPosX(x);
+		this.characters[i].setPosY(y);
+		this.characters[i].setDesX(dx);
+		this.characters[i].setDesY(dy);
 	}
 
 	//	public void rotateCharacter(int dir) {

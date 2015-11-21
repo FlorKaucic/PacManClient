@@ -39,6 +39,9 @@ public class ClientProtocol {
 			System.out.println("READYOK");
 			processReady();
 		}
+		if (input.startsWith("MOVE")){
+			processMovement(input.substring(5));
+		}
 		if (input.startsWith("PING"))
 			Connection.getInstance().send("PONG");
 	}
@@ -47,6 +50,14 @@ public class ClientProtocol {
 //		GameFrame frame = GameFrame.getInstance();
 //		frame.initCountdown();
 //	}
+
+	private static void processMovement(String input) {
+		String[] num = input.split(" ");
+		GameFrame frame = GameFrame.getInstance();
+		frame.setMovement(Integer.parseInt(num[0]),
+				Integer.parseInt(num[2]),Integer.parseInt(num[2]),
+				Integer.parseInt(num[3]),Integer.parseInt(num[4]));	
+	}
 
 	private static void processReady() {
 		GameFrame frame = GameFrame.getInstance();
