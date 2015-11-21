@@ -44,7 +44,9 @@ public class ClientProtocol {
 
 	private static void processStart(String input) {
 		GameFrame frame = GameFrame.getInstance();
+		System.out.println("before parse");
 		frame.initMatch(Parser.parseCharacters(input));
+		System.out.println("after parse");
 	}
 
 	private static void processLogin(String input){

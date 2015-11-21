@@ -148,8 +148,11 @@ public class GameFrame extends JFrame {
 		waiting.dispose();
 		time = 0;
 		playing = true;
-		mapa.addCharacters(characters);
 
+		System.out.println("before added");
+		mapa.addCharacters(characters);
+		System.out.println("after added");
+		
 		Thread t = new Thread() {
 			@Override
 			public void run() {

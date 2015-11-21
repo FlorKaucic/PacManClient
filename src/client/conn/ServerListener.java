@@ -11,13 +11,15 @@ public class ServerListener extends Thread {
 
 			String input;
 			while ((input = in.readLine()) != null) {
-				System.out.println("Se leyo una linea");
+				System.out.println("Se leyo una linea "+input);
 				ClientProtocol.processInput(input);
 			}
+
+			System.out.println("Se leyo una linea "+input);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.", "Cliente",
 					JOptionPane.ERROR_MESSAGE);
-			ex.printStackTrace();
+			// CHANGE
 		}
 	}
 }
