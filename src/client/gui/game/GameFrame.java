@@ -186,6 +186,7 @@ public class GameFrame extends JFrame {
 			scorer4.setLocation(4*this.getWidth()/(cantPlayers+1)-scorer4.getWidth()/2,0);
 			contentPane.add(scorer4);
 		}
+		
 		if(cantPlayers==5){
 			scorer5 = new ScorePanel();
 			scorer5.setLocation(5*this.getWidth()/(cantPlayers+1)-scorer5.getWidth()/2,0);
