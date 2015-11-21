@@ -139,13 +139,10 @@ public class GameFrame extends JFrame {
 		System.out.println("before added");
 		mapa.addCharacters(characters);
 		System.out.println("after added");
-<<<<<<< HEAD
+
 		
 		setScorers(characters.length);
 		
-=======
-
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
 		Thread t = new Thread() {
 			@Override
 			public void run() {
@@ -165,7 +162,6 @@ public class GameFrame extends JFrame {
 		t.start();
 	}
 
-<<<<<<< HEAD
 //	public void initCountdown() {
 //		time = 10;
 //		Thread t = new Thread() {
@@ -216,7 +212,7 @@ public class GameFrame extends JFrame {
 		}
 
 	}
-=======
+
 	public void showWaiting() {
 		waiting = new WaitingDialog(this.user.getProfile());
 		waiting.setVisible(true);
@@ -248,5 +244,5 @@ public class GameFrame extends JFrame {
 	//		};
 	//		t.start();
 	//	}
->>>>>>> branch 'master' of https://github.com/FlorKaucic/PacManClient.git
+
 }
