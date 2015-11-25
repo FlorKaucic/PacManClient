@@ -16,7 +16,7 @@ public class ServerListener extends Thread {
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Fallo al recibir del servidor.\n"+ex, "Cliente",
 					JOptionPane.ERROR_MESSAGE);
-			// CHANGE
+			System.exit(0);
 		}
 	}
 }

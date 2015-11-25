@@ -5,10 +5,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -45,24 +43,23 @@ public class Config {
 		}
 	}
 	
-	public static void save(){
-		OutputStream output = null;
-		
-		try {
-			output = new FileOutputStream("config.properties");
-			CONFIG.store(output, null);
-		} catch (IOException io) {
-			JOptionPane.showMessageDialog(null, "No se pudieron guardar los cambios en la configuracion.", "Error", JOptionPane.ERROR_MESSAGE);
-		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	public static void save(){
+//		OutputStream output = null;
+//		
+//		try {
+//			output = new FileOutputStream("config.properties");
+//			CONFIG.store(output, null);
+//		} catch (IOException io) {
+//			JOptionPane.showMessageDialog(null, "No se pudieron guardar los cambios en la configuracion.", "Error", JOptionPane.ERROR_MESSAGE);
+//		} finally {
+//			if (output != null) {
+//				try {
+//					output.close();
+//				} catch (IOException e) {
+//				}
+//			}
+//		}
+//	}
 	
 	public static String get(String key){
 		return (String) CONFIG.get(key);

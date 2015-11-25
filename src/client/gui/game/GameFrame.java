@@ -15,6 +15,7 @@ import client.gui.game.map.*;
 import client.gui.game.other.ScorePanel;
 import client.gui.game.other.TimerPanel;
 import client.gui.game.other.WaitingDialog;
+import client.gui.game.other.WinnerDialog;
 import client.gui.notifications.Alert;
 import client.logic.User;
 
@@ -42,13 +43,7 @@ public class GameFrame extends JFrame {
 	protected int time;
 	protected boolean playing;
 
-	protected ScorePanel scorer1;
-	protected ScorePanel scorer2;
-	protected ScorePanel scorer3;
-	protected ScorePanel scorer4;
-	protected ScorePanel scorer5;
-
-	private int cantPlayers;
+	protected ScorePanel[] scorers;
 
 	public static GameFrame getInstance() {
 		if (INSTANCE == null)
@@ -134,6 +129,7 @@ public class GameFrame extends JFrame {
 		});
 
 		waiting.dispose();
+		setScorers(characters);
 		time = 0;
 		playing = true;
 
@@ -143,8 +139,6 @@ public class GameFrame extends JFrame {
 
 
 		mapa.addCharacters(characters);
-	
-		setScorers(characters.length);
 		
 		Thread t = new Thread() {
 			@Override
@@ -187,32 +181,13 @@ public class GameFrame extends JFrame {
 //		t.start();
 //	}
 	
-	private void setScorers(int cantPlayers){
-		if(cantPlayers>=1){
-			scorer1 = new ScorePanel();
-			scorer1.setLocation(1*(this.getWidth()/(cantPlayers+1))-scorer1.getWidth()/2,0);
-			contentPane.add(scorer1);
-		}
-		if(cantPlayers>=2){
-			scorer2 = new ScorePanel();
-			scorer2.setLocation(2*(this.getWidth()/(cantPlayers+1))-scorer2.getWidth()/2,0);
-			contentPane.add(scorer2);
-		}
-		if(cantPlayers>=3){
-			scorer3 = new ScorePanel();
-			scorer3.setLocation(3*this.getWidth()/(cantPlayers+1)-scorer3.getWidth()/2,0);
-			contentPane.add(scorer3);
-		}
-		if(cantPlayers>=4){
-			scorer4 = new ScorePanel();
-			scorer4.setLocation(4*this.getWidth()/(cantPlayers+1)-scorer4.getWidth()/2,0);
-			contentPane.add(scorer4);
-		}
-		
-		if(cantPlayers==5){
-			scorer5 = new ScorePanel();
-			scorer5.setLocation(5*this.getWidth()/(cantPlayers+1)-scorer5.getWidth()/2,0);
-			contentPane.add(scorer5);
+	public void setScorers(Character [] lines){
+		int cantPlayers = lines.length;
+		scorers = new ScorePanel[lines.length];
+		for(int i=0; i<lines.length;i++){
+			scorers[i] = new ScorePanel(i);
+			scorers[i].setLocation((i+1)*(this.getWidth()/(cantPlayers+1))-scorers[i].getWidth()/2,0);
+			contentPane.add(scorers[i]);
 		}
 
 	}
@@ -253,6 +228,25 @@ public class GameFrame extends JFrame {
 
 	public void setMovement(int i, int x, int y, int dx, int dy) {
 		mapa.setMovement(i, x, y, dx, dy);
+	}
+
+	public void ballDown(int i) {
+		mapa.removeBall(i);
+	}
+
+	public void sBallDown(int i) {
+		mapa.removeSBall(i);
+	}
+	
+	public void setWinner(int profile) {
+		WinnerDialog winner = new WinnerDialog(profile);
+		winner.setVisible(true);
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				winner.requestFocus();
+			}
+		});
 	}
 
 }
