@@ -31,7 +31,7 @@ protected Image img = null;
 			lblScore.setHorizontalAlignment(SwingConstants.CENTER);
 			lblScore.setText("---");
 			lblScore.setForeground(Color.WHITE);
-			lblScore.setFont(new Font("Baby Kruffy", Font.PLAIN, 24));
+			lblScore.setFont(new Font("Kristen ITC", Font.BOLD, 24));
 			lblScore.setBounds(30, 0, 75, 30);
 			add(lblScore);
 		} catch (IOException e) {
@@ -55,6 +55,10 @@ protected Image img = null;
 		super.paint(g);
 		if(img != null)
 			g.drawImage(this.img, 0, 0, 30, 30, 0, 0, 30, 30, null);
+	}
+
+	public void setScore(int score) {
+		lblScore.setText(String.valueOf(score));	
 	}
 
 }

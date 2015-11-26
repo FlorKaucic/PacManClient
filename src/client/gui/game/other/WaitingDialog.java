@@ -59,16 +59,16 @@ public class WaitingDialog extends JDialog {
 				contentPanel.add(error);
 			}
 		JLabel pj = new JLabel("Tu perfil es "+Parser.parseProfile(profile));
-		pj.setBounds(100,50,200,70);
+		pj.setBounds(100,50,250,70);
 		pj.setForeground(Color.WHITE);
-		pj.setFont(new Font("Baby Kruffy", Font.PLAIN, 18));
+		pj.setFont(new Font("Kristen ITC", Font.BOLD, 18));
 		pj.setVisible(true);
 		contentPanel.add(pj);
 		
 		mensaje = new JLabel("Esperando a los demas jugadores...");
-		mensaje.setBounds(50,300,300,50);
+		mensaje.setBounds(50,300,350,50);
 		mensaje.setForeground(Color.WHITE);
-		mensaje.setFont(new Font("Baby Kruffy", Font.PLAIN, 16));
+		mensaje.setFont(new Font("Kristen ITC", Font.BOLD, 16));
 		mensaje.setVisible(true);
 		contentPanel.add(mensaje);
 		

@@ -52,10 +52,14 @@ public class ClientProtocol {
 		if (input.startsWith("SBALLDOWN"))
 			processSBallDown(input);
 		
-		if (input.startsWith("SCORES"))
-			processScores(input.substring(6));
+		if (input.startsWith("SCORE"))
+			processScores(input);
+		
 		if(input.startsWith("WINNER"))
 			processWinner(input.substring(7));
+		
+		if(input.startsWith("FINISHED"))
+			processFinished();
 	}
 
 	private static void processWinner(String substring) {
@@ -67,12 +71,19 @@ public class ClientProtocol {
 		GameFrame frame = GameFrame.getInstance();
 		//frame.setScorers(aux);
 		frame.setWinner(profile);
+		frame.setOffPlaying();
+	}
+	
+	private static void processFinished(){
+		GameFrame frame = GameFrame.getInstance();
+		frame.setOffPlaying();
 	}
 
 	private static void processScores(String substring) {
 		String[] lines = substring.split(" ");
 		GameFrame frame = GameFrame.getInstance();
-		//frame.setScorers(lines);
+		frame.setScore(Integer.parseInt(lines[1]), Integer.parseInt(lines[2]));
+		
 	}
 
 	// StringBuffer str = new StringBuffer("SCORES ");

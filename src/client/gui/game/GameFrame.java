@@ -117,7 +117,7 @@ public class GameFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (GameFrame.this.user.getProfile() != -1) {
-					Alert dialog = new Alert("Usa las flechas para moverte.");
+					Alert dialog = new Alert("Usa las flechas del teclado para moverte.");
 					dialog.setBorderColor(Color.YELLOW);
 					dialog.setVisible(true);
 				} else {
@@ -191,6 +191,10 @@ public class GameFrame extends JFrame {
 		}
 
 	}
+	
+	public void setScore(int caracter, int score){
+		scorers[caracter].setScore(score);
+	}
 
 	
 
@@ -247,6 +251,10 @@ public class GameFrame extends JFrame {
 				winner.requestFocus();
 			}
 		});
+	}
+	
+	public void setOffPlaying(){
+		playing = false;
 	}
 
 }

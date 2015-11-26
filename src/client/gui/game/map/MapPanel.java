@@ -124,20 +124,14 @@ public class MapPanel extends JPanel {
 	}
 
 	public void setDir(int i) {
-		// TODO Auto-generated method stub
 		this.dir = i;
 	}
 
 	public void removeBall(int i) {
-		//balls.remove(i);
 		this.remove(balls.get(i));
-		//balls.set(i, null);
-		
 	}
 	public void removeSBall(int i) {
-		//balls.remove(i);
 		this.remove(sballs.get(i));
-		sballs.set(i, null);
 	}
 
 	// public void rotateCharacter(int dir) {

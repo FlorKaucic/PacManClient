@@ -29,7 +29,7 @@ public class Alert extends JDialog {
 		lblTime.setBounds(20, 7, 300, 30);
 		lblTime.setText(msg);
 		lblTime.setForeground(Color.BLACK);
-		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTime.setFont(new Font("Kristen ITC", Font.PLAIN, 14));
 		add(lblTime);
 		
 		Timer timer = new Timer(1000, new ActionListener() {

@@ -21,13 +21,14 @@ public class TimerPanel extends JPanel {
 		lblTime.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTime.setText("--:--");
 		lblTime.setForeground(Color.WHITE);
-		lblTime.setFont(new Font("Baby Kruffy", Font.PLAIN, 24));
+		lblTime.setFont(new Font("Kristen ITC", Font.BOLD, 24));
 		lblTime.setBounds(0, 0, 75, 50);
 		add(lblTime);
 	}
 
 	public void update(int time) {
-		this.lblTime.setText(Parser.parseTime(time));
+		if(time <= 2400)
+			this.lblTime.setText(Parser.parseTime(time));
 	}
 
 }

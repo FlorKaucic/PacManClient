@@ -53,14 +53,14 @@ public class WinnerDialog extends JDialog {
 				JLabel error = new JLabel("No se pudo cargar la imagen.");
 				error.setBounds(90, 150, 200, 50);
 				error.setForeground(Color.WHITE);
-				error.setFont(new Font("Tahoma", Font.BOLD, 14));
+				error.setFont(new Font("Kristen ITC", Font.BOLD, 14));
 				error.setVisible(true);
 				contentPanel.add(error);
 			}
 		JLabel pj = new JLabel("Gano el jugador "+Parser.parseProfile(profile));
 		pj.setBounds(100,50,200,70);
 		pj.setForeground(Color.WHITE);
-		pj.setFont(new Font("Tahoma", Font.BOLD, 18));
+		pj.setFont(new Font("Kristen ITC", Font.BOLD, 18));
 		pj.setVisible(true);
 		contentPanel.add(pj);
 		
