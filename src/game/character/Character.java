@@ -26,6 +26,7 @@ public class Character extends Drawable {
 	public void update() {
 		this.posX += this.vel * this.desX;
 		this.posY += this.vel * this.desY;
+		
 	}
 
 	@Override

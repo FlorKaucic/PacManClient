@@ -55,11 +55,22 @@ public class ClientProtocol {
 		if (input.startsWith("SCORE"))
 			processScores(input);
 		
+		if(input.startsWith("RESPAWN"))
+			processRespawn(input);
+			
 		if(input.startsWith("WINNER"))
 			processWinner(input.substring(7));
 		
 		if(input.startsWith("FINISHED"))
 			processFinished();
+	}
+
+	private static void processRespawn(String input) {
+		String[] num = input.split(" ");
+		GameFrame frame = GameFrame.getInstance();
+		frame.setRespawn(Integer.parseInt(num[1]), Integer.parseInt(num[2]), Integer.parseInt(num[3]),
+				Integer.parseInt(num[4]), Integer.parseInt(num[5]));
+		
 	}
 
 	private static void processWinner(String substring) {

@@ -79,7 +79,6 @@ public class GameFrame extends JFrame {
 			public void keyPressed(KeyEvent k) {
 				if (k.getKeyCode() >= KeyEvent.VK_LEFT && k.getKeyCode() <= KeyEvent.VK_DOWN) {
 					Connection.getInstance().send("MOVE "+(k.getKeyCode() - KeyEvent.VK_LEFT));
-//					mapa.setDir(k.getKeyCode() - KeyEvent.VK_LEFT);
 				}
 			}
 		});
@@ -255,6 +254,10 @@ public class GameFrame extends JFrame {
 	
 	public void setOffPlaying(){
 		playing = false;
+	}
+
+	public void setRespawn(int i, int x, int y, int dx, int dy) {
+		mapa.setRespawn(i, x, y, dx, dy);
 	}
 
 }

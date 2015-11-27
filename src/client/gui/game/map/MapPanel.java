@@ -119,7 +119,7 @@ public class MapPanel extends JPanel {
 		if (dx != 0 || dy != 0) {
 			this.characters[i].setImgY();
 			this.characters[i].setMoving(true);
-		} else
+		} else if(dx==0 && dy==0)
 			this.characters[i].setMoving(false);
 	}
 
@@ -132,6 +132,19 @@ public class MapPanel extends JPanel {
 	}
 	public void removeSBall(int i) {
 		this.remove(sballs.get(i));
+	}
+
+	public void setRespawn(int i, int x, int y, int dx, int dy) {
+		this.characters[i].setPosX(x);
+		this.characters[i].setPosY(y);
+		this.characters[i].setDesX(dx);
+		this.characters[i].setDesY(dy);
+//		if (dx != 0 || dy != 0) {
+//			this.characters[i].setImgY();
+//			this.characters[i].setMoving(true);
+//		} else
+		this.characters[i].setMoving(false);
+		
 	}
 
 	// public void rotateCharacter(int dir) {
