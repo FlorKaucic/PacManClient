@@ -47,9 +47,9 @@ public class WaitingDialog extends JDialog {
 
 		getRootPane().add(contentPanel);
 		
-		if(profile != -1)
+		//if(profile != -1)
 			try {
-				this.img = ImageIO.read(new File(Config.get("img_path")+Parser.parseProfile(profile).toLowerCase()+".png"));
+				this.img = ImageIO.read(new File(Config.get("img_path")+Parser.parseProfile(profile).toLowerCase()+"profile.png"));
 			} catch (IOException e) {
 				JLabel error = new JLabel("No se pudo cargar la imagen.");
 				error.setBounds(90, 150, 200, 50);
@@ -93,7 +93,7 @@ public class WaitingDialog extends JDialog {
 	public void paint(Graphics g) {
 		super.paint(g);
 		if(img != null)
-			g.drawImage(this.img, 120, 120, 280, 280, 0, 0, 30, 30, null);
+			g.drawImage(this.img, 120, 120, 280, 280, 0, 0, 160, 160, null);
 	}
 	
 }
